@@ -1,86 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Philadelphia Neighborhoods Zoom</title>
+  <meta charset="UTF-8" />
+  <title>Scrollytelling: Zoom to Philly</title>
+  <link rel="stylesheet" href="style.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
-  <style>
-    body { margin: 0; }
-    svg { display: block; background: #f9f9f9; }
-    .scroll-area {
-      height: 300vh;
-    }
-    .fixed-map {
-      position: fixed;
-      top: 0;
-      left: 0;
-    }
-  </style>
+  <script src="https://cdn.jsdelivr.net/npm/topojson@3"></script>
 </head>
 <body>
-  <div class="scroll-area">
-    <svg class="fixed-map" width="960" height="600"></svg>
+  <div class="container">
+    <div class="map-container">
+      <svg></svg>
+    </div>
+    <div class="text-container">
+      <div class="step">Scroll to zoom into Philadelphia</div>
+      <div class="step">Keep scrolling to reveal neighborhoods</div>
+      <div class="step">Each shape represents a neighborhood</div>
+      <div class="step">Zoom complete!</div>
+    </div>
   </div>
-
-  <script>
-    const width = 960, height = 600;
-    const svg = d3.select("svg");
-    const g = svg.append("g");
-
-    const projection = d3.geoMercator()
-      .scale(1)
-      .translate([0, 0]);
-
-    const path = d3.geoPath().projection(projection);
-
-    d3.json("https://raw.githubusercontent.com/opendataphilly/open-geo-data/master/philadelphia-neighborhoods/philadelphia-neighborhoods.geojson")
-      .then(data => {
-        // Fit projection to the data
-        const bounds = path.bounds(data);
-        const dx = bounds[1][0] - bounds[0][0];
-        const dy = bounds[1][1] - bounds[0][1];
-        const x = (bounds[0][0] + bounds[1][0]) / 2;
-        const y = (bounds[0][1] + bounds[1][1]) / 2;
-        const scale = 0.9 / Math.max(dx / width, dy / height);
-        const translate = [width / 2 - scale * x, height / 2 - scale * y];
-
-        // Initial base projection
-        projection
-          .scale(scale)
-          .translate(translate);
-
-        // Save original settings
-        const originalScale = scale;
-        const originalTranslate = [...translate];
-
-        // Render the neighborhoods
-        g.selectAll("path")
-          .data(data.features)
-          .enter().append("path")
-          .attr("d", path)
-          .attr("fill", "#69b3a2")
-          .attr("stroke", "#222");
-
-        // Scroll to zoom in
-        window.addEventListener("scroll", () => {
-          const scrollY = window.scrollY;
-          const maxScroll = document.body.scrollHeight - window.innerHeight;
-
-          const t = Math.min(scrollY / maxScroll, 1); // 0 to 1
-
-          const scaleFactor = d3.interpolate(originalScale, originalScale * 8);
-          const translateFactor = d3.interpolate(
-            originalTranslate,
-            [width / 2 - scaleFactor(t) * x, height / 2 - scaleFactor(t) * y]
-          );
-
-          projection
-            .scale(scaleFactor(t))
-            .translate(translateFactor(t));
-
-          g.selectAll("path").attr("d", path);
-        });
-      });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
