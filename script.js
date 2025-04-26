@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Load GeoJSON, bus stop CSV, and Indego station CSV
     Promise.all([
-        d3.json("updated_philazip.geojson"),
-        d3.csv("busstops.csv"),
-        d3.csv("UPDATEDIndego.csv")
+        d3.json("updated_philazip.geojson"), // GeoJSON file for ZIP boundaries
+        d3.csv("busstops.csv"),              // CSV file for bus stops
+        d3.csv("UPDATEDIndego.csv")          // CSV file for Indigo stations
     ]).then(function([geojson, busStops, indigoStations]) {
-        console.log("Loaded ZIP boundaries, bus stop data, and Indigo stations.");
+        console.log("Loaded ZIP boundaries, bus stop data, and Indigo station.");
 
         const width = window.innerWidth;
         const height = window.innerHeight;
@@ -15,42 +14,70 @@ document.addEventListener("DOMContentLoaded", function () {
             .attr("width", width)
             .attr("height", height);
 
-        // Group to contain all map elements
         const g = svg.append("g");
 
-        // Projection and path setup
         const projection = d3.geoMercator()
-            .center([-75.1652, 39.9526])  // Philadelphia center
+            .center([-75.1652, 39.9526])  // Philadelphia
             .scale(50000);
 
         const path = d3.geoPath().projection(projection);
 
-        let zoomScale = 50000; // Initial zoom level
+        // Add zoom controls
+        let currentScale = 1;
+        const updateScale = () => g.attr("transform", `scale(${currentScale})`);
 
-        // Store markers separately for re-rendering
-        const busStopData = [];
-        const indigoStationData = [];
-
-        // Store bus stop data
-        busStops.forEach(function(d) {
-            busStopData.push({
-                lat: parseFloat(d.Lat),
-                lon: parseFloat(d.Lon),
-                route: d.Route,
-                direction: d.Direction
-            });
+        document.getElementById("zoom-in").addEventListener("click", () => {
+            currentScale *= 1.2;
+            updateScale();
         });
 
-        // Store bike station data
-        indigoStations.forEach(function(station) {
-            indigoStationData.push({
-                lat: parseFloat(station.Latitude),
-                lon: parseFloat(station.Longitude),
-                name: station.Station_Name
-            });
+        document.getElementById("zoom-out").addEventListener("click", () => {
+            currentScale /= 1.2;
+            updateScale();
         });
 
-        // Draw the base map (ZIP boundaries)
+        // Build RBush spatial index for bus stops
+        const busStopIndex = new RBush();
+        const busStopPoints = busStops.map(d => {
+            const lon = parseFloat(d.Lon);
+            const lat = parseFloat(d.Lat);
+            return {
+                minX: lon,
+                minY: lat,
+                maxX: lon,
+                maxY: lat,
+                lon,
+                lat
+            };
+        });
+        busStopIndex.load(busStopPoints);
+
+        // Count bus stops per ZIP using RBush
+        geojson.features.forEach(feature => {
+            const bounds = d3.geoBounds(feature);
+            const minLon = bounds[0][0];
+            const minLat = bounds[0][1];
+            const maxLon = bounds[1][0];
+            const maxLat = bounds[1][1];
+
+            const candidates = busStopIndex.search({
+                minX: minLon,
+                minY: minLat,
+                maxX: maxLon,
+                maxY: maxLat
+            });
+
+            let count = 0;
+            candidates.forEach(stop => {
+                if (d3.geoContains(feature, [stop.lon, stop.lat])) {
+                    count++;
+                }
+            });
+
+            feature.properties.busStopCount = count;
+        });
+
+        // Draw the ZIP code map with mouseover info
         g.selectAll("path")
             .data(geojson.features)
             .enter()
@@ -58,88 +85,48 @@ document.addEventListener("DOMContentLoaded", function () {
             .attr("d", path)
             .attr("fill", "lightblue")
             .attr("stroke", "black")
-            .attr("stroke-width", 1);
-
-        // Draw markers for bus stops and bike stations
-        function drawMarkers() {
-            g.selectAll(".bus-stop").remove();
-            g.selectAll(".bike-station").remove();
-
-            // Bus stops
-            busStopData.forEach(function(d) {
-                const [x, y] = projection([d.lon, d.lat]);
-
-                g.append("circle")
-                    .attr("class", "bus-stop")
-                    .attr("cx", x)
-                    .attr("cy", y)
-                    .attr("r", 1.5)
-                    .attr("fill", "red")
-                    .on("mouseover", function() {
-                        d3.select(this).attr("fill", "orange");
-                        g.append("text")
-                            .attr("x", x + 5)
-                            .attr("y", y - 5)
-                            .attr("fill", "black")
-                            .attr("font-size", "12px")
-                            .attr("id", "bus-label")
-                            .text(`${d.route} - ${d.direction}`);
-                    })
-                    .on("mouseout", function() {
-                        d3.select(this).attr("fill", "red");
-                        g.select("#bus-label").remove();
-                    });
+            .attr("stroke-width", 1)
+            .on("mouseover", function (event, d) {
+                d3.select(this).attr("fill", "orange");
+                const [x, y] = d3.pointer(event);
+                g.append("text")
+                    .attr("x", x)
+                    .attr("y", y - 10)
+                    .attr("fill", "black")
+                    .attr("font-size", "12px")
+                    .attr("id", "zip-label")
+                    .text(`Bus Stops: ${d.properties.busStopCount}`);
+            })
+            .on("mouseout", function () {
+                d3.select(this).attr("fill", "lightblue");
+                g.select("#zip-label").remove();
             });
 
-            // Bike stations
-            indigoStationData.forEach(function(station) {
-                const [x, y] = projection([station.lon, station.lat]);
-
-                g.append("text")
-                    .attr("class", "bike-station")
-                    .attr("x", x)
-                    .attr("y", y)
-                    .attr("font-size", "20px")
-                    .attr("text-anchor", "middle")
-                    .attr("alignment-baseline", "middle")
-                    .text("🚲")
-                    .on("mouseover", function() {
-                        d3.select(this).attr("font-size", "26px");
+            indigoStations.forEach(station => {
+                const lat = parseFloat(station.Latitude);
+                const lon = parseFloat(station.Longitude);
+                const [x, y] = projection([lon, lat]);
+            
+                g.append("circle")
+                    .attr("cx", x)
+                    .attr("cy", y)
+                    .attr("r", 1)  // Size of the circle
+                    .attr("fill", "green")  // Color for Indigo stations
+                    .on("mouseover", function () {
+                        d3.select(this).attr("r", 7);  // Enlarge circle on hover
                         g.append("text")
                             .attr("x", x + 10)
                             .attr("y", y - 10)
                             .attr("fill", "black")
                             .attr("font-size", "12px")
                             .attr("id", "bike-label")
-                            .text(station.name);
+                            .text(station.Station_Name);
                     })
-                    .on("mouseout", function() {
-                        d3.select(this).attr("font-size", "20px");
+                    .on("mouseout", function () {
+                        d3.select(this).attr("r", 1);  // Return to original size
                         g.select("#bike-label").remove();
                     });
             });
-        }
-
-        // Initial marker draw
-        drawMarkers();
-
-        // Re-render map and markers on zoom
-        function updateMapScale() {
-            projection.scale(zoomScale);
-            g.selectAll("path").attr("d", path);
-            drawMarkers();
-        }
-
-        // Button listeners
-        document.getElementById("zoom-in").addEventListener("click", function () {
-            zoomScale *= 1.25;
-            updateMapScale();
-        });
-
-        document.getElementById("zoom-out").addEventListener("click", function () {
-            zoomScale /= 1.25;
-            updateMapScale();
-        });
 
     }).catch(function(error) {
         console.error("Error loading data:", error);
