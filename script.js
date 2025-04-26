@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     Promise.all([
-        d3.json("updated_philazip.geojson"), // GeoJSON file for ZIP boundaries
-        d3.csv("busstops.csv"),              // CSV file for bus stops
-        d3.csv("UPDATEDIndego.csv")          // CSV file for Indigo stations
-    ]).then(function([geojson, busStops, indigoStations]) {
-        console.log("Loaded ZIP boundaries, bus stop data, and Indigo station.");
+        d3.json("updated_philazip.geojson"), // GeoJSON for ZIP boundaries
+        d3.csv("busstops.csv"),              // CSV for bus stops
+        d3.csv("UPDATEDIndego.csv")          // CSV for Indigo stations
+    ]).then(function ([geojson, busStops, indigoStations]) {
+        console.log("Loaded ZIP boundaries, bus stops, and Indigo stations.");
 
         const width = window.innerWidth;
         const height = window.innerHeight;
@@ -17,12 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const g = svg.append("g");
 
         const projection = d3.geoMercator()
-            .center([-75.1652, 39.9526])  // Philadelphia
+            .center([-75.1652, 39.9526])  // Philadelphia center
             .scale(50000);
 
         const path = d3.geoPath().projection(projection);
 
-        // Add zoom controls
+        // Zoom controls
         let currentScale = 1;
         const updateScale = () => g.attr("transform", `scale(${currentScale})`);
 
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             updateScale();
         });
 
-        // Build RBush spatial index for bus stops
+        // RBush spatial index for bus stops
         const busStopIndex = new RBush();
         const busStopPoints = busStops.map(d => {
             const lon = parseFloat(d.Lon);
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         busStopIndex.load(busStopPoints);
 
-        // Count bus stops per ZIP using RBush
+        // Count bus stops per ZIP
         geojson.features.forEach(feature => {
             const bounds = d3.geoBounds(feature);
             const minLon = bounds[0][0];
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
             feature.properties.busStopCount = count;
         });
 
-        // Draw the ZIP code map with mouseover info
+        // Draw ZIP code regions
         g.selectAll("path")
             .data(geojson.features)
             .enter()
@@ -102,33 +102,49 @@ document.addEventListener("DOMContentLoaded", function () {
                 g.select("#zip-label").remove();
             });
 
-            indigoStations.forEach(station => {
-                const lat = parseFloat(station.Latitude);
-                const lon = parseFloat(station.Longitude);
-                const [x, y] = projection([lon, lat]);
-            
-                g.append("circle")
-                    .attr("cx", x)
-                    .attr("cy", y)
-                    .attr("r", 1)  // Size of the circle
-                    .attr("fill", "green")  // Color for Indigo stations
-                    .on("mouseover", function () {
-                        d3.select(this).attr("r", 7);  // Enlarge circle on hover
-                        g.append("text")
-                            .attr("x", x + 10)
-                            .attr("y", y - 10)
-                            .attr("fill", "black")
-                            .attr("font-size", "12px")
-                            .attr("id", "bike-label")
-                            .text(station.Station_Name);
-                    })
-                    .on("mouseout", function () {
-                        d3.select(this).attr("r", 1);  // Return to original size
-                        g.select("#bike-label").remove();
-                    });
-            });
+        // Add Indigo stations as green dots
+        indigoStations.forEach(station => {
+            const lat = parseFloat(station.Latitude);
+            const lon = parseFloat(station.Longitude);
+            const [x, y] = projection([lon, lat]);
 
-    }).catch(function(error) {
+            g.append("circle")
+                .attr("cx", x)
+                .attr("cy", y)
+                .attr("r", 1)
+                .attr("fill", "green")
+                .on("mouseover", function () {
+                    d3.select(this).attr("r", 7);
+                    g.append("text")
+                        .attr("x", x + 10)
+                        .attr("y", y - 10)
+                        .attr("fill", "black")
+                        .attr("font-size", "12px")
+                        .attr("id", "bike-label")
+                        .text(station.Station_Name);
+                })
+                .on("mouseout", function () {
+                    d3.select(this).attr("r", 1);
+                    g.select("#bike-label").remove();
+                });
+        });
+
+        // Added train routes, uncomment this to enable it!
+//        d3.json("Highspeed_Lines.geojson").then(trainData => {
+//            g.selectAll(".train-line")
+//                .data(trainData.features)
+//                .enter()
+//                .append("path")
+//                .attr("class", "train-line")
+//                .attr("d", path)
+//                .attr("fill", "none")
+//                .attr("stroke", "orange")
+//                .attr("stroke-width", 2);
+//        }).catch(error => {
+//            console.error("Error loading train route data:", error);
+//        });
+
+    }).catch(function (error) {
         console.error("Error loading data:", error);
     });
 });
