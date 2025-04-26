@@ -1,0 +1,263 @@
+Station_ID,Station_Name,Day of Go_live_date,Status,Latitude,Longitude
+3005,"Welcome Park, NPS",4/23/2015,Active,39.94734549200867,-75.14402934
+3006,40th & Spruce,4/23/2015,Active,39.9522,-75.20311
+3007,"11th & Pine, Kahn Park",4/23/2015,Active,39.94516911296436,-75.1599338
+3008,Temple University Station,4/23/2015,Active,39.98081,-75.15067
+3009,33rd & Market,4/23/2015,Active,39.95576,-75.18982
+3010,15th & Spruce,4/23/2015,Active,39.947311,-75.166569
+3012,21st & Catharine,4/23/2015,Active,39.9421844,-75.1773685
+3014,"21st & Winter, Franklin Institute",4/23/2015,Active,39.95888036,-75.17368857
+3015,"4th & Walnut, NPS",4/23/2015,Active,39.94738064,-75.14885622
+3016,"11th & Poplar, John F. Street Community Center",4/23/2015,Active,39.96893076,-75.15469877
+3017,6th & Berks,4/23/2015,Active,39.98003,-75.14371
+3018,12th & Filbert,4/29/2015,Active,39.9528112,-75.1599914
+3019,6th & Race,4/29/2015,Active,39.95403,-75.14983
+3020,University City Station,4/23/2015,Active,39.9478438,-75.1903818
+3021,18th & JFK,4/23/2015,Active,39.954204,-75.16978
+3022,Amtrak 30th Street Station,4/23/2015,Active,39.9546925,-75.1832927
+3024,"43rd & Chester, Clark Park",4/23/2015,Active,39.95486966,-75.18322811
+3025,11th & Washington,4/23/2015,Active,39.93724,-75.1612
+3026,2nd & Lombard,4/23/2015,Active,39.9418424,-75.1454843
+3028,4th & Bainbridge,4/23/2015,Active,39.9406414,-75.1495768
+3029,36th & Sansom,4/23/2015,Active,39.9538,-75.19479
+3030,Darien & Catharine,4/23/2015,Active,39.93935,-75.15716
+3031,13th & Montgomery,4/23/2015,Active,39.98005,-75.15522
+3032,23rd & South,4/23/2015,Active,39.945366,-75.17953365
+3033,10th & Chestnut,4/23/2015,Active,39.95005,-75.15672
+3034,11th & Reed,4/23/2015,Active,39.93315,-75.16248
+3035,Dornsife Center,7/31/2015,Active,39.96271,-75.19419
+3037,Pennsylvania Convention Center,4/29/2015,Active,39.955107,-75.1602358
+3038,The Children's Hospital of Philadelphia (CHOP),4/23/2015,Active,39.9476181,-75.1944141
+3039,Broad & Girard,4/23/2015,Active,39.9716278,-75.159943
+3040,17th & Spring Garden,4/23/2015,Active,39.96289,-75.16606
+3041,"Girard Station, MFL",4/23/2015,Active,39.96850409,-75.13545904
+3047,"Independence Mall, NPS",4/23/2015,Active,39.95073718,-75.14947893
+3049,Foglietta Plaza,4/23/2015,Active,39.94509,-75.1425
+3051,23rd & Fairmount,4/23/2015,Active,39.96744,-75.17507
+3052,9th & Locust,4/23/2015,Active,39.9473232,-75.1569003
+3053,Point Breeze & Tasker,4/23/2015,Active,39.9323324,-75.181495
+3054,Rodin Museum,4/23/2015,Active,48.8547473,2.315867
+3055,8th & Market,4/28/2015,Active,39.9512871,-75.1535469
+3056,Broad & Oxford,4/23/2015,Active,39.97669,-75.15813
+3057,Philadelphia Museum of Art,4/23/2015,Active,39.9655639,-75.1815121
+3058,20th & Fairmount,4/23/2015,Active,39.9671425,-75.1700305
+3059,"Spring Garden Station, BSL",4/23/2015,Active,39.96287038,-75.16122553
+3060,Free Library of Philadelphia - Central Library,4/23/2015,Active,39.9594166,-75.1703315
+3061,23rd & Market,4/23/2015,Active,39.9542617,-75.17756
+3062,24th & Sansom,4/23/2015,Active,39.9519156,-75.1794573
+3063,17th & Pine,4/23/2015,Active,39.946315,-75.169648
+3064,"18th & Washington, Chew Playground",4/23/2015,Active,39.93843702,-75.17327764
+3065,Girard & Hutchinson,4/23/2015,Active,39.9706807,-75.1516833
+3066,19th & Lombard,4/23/2015,Active,39.94561,-75.17348
+3067,"39th & Mt. Vernon, Mantua Haverford Community Center",4/23/2015,Active,39.96415551,-75.19973091
+3068,Broad & Federal,4/23/2015,Active,39.93549,-75.16711
+3069,4th & Christian,4/23/2015,Active,39.9370605,-75.1504476
+3072,Front & Carpenter,4/23/2015,Active,39.93445,-75.14541
+3073,9th & Spring Garden,4/28/2015,Active,39.96143,-75.15242
+3074,44th & Walnut,4/28/2015,Active,39.95511,-75.20987
+3075,Fairmount & Ridge,4/28/2015,Active,44.6400861,-63.6337888
+3077,17th & Girard,4/29/2015,Active,39.97207,-75.16351
+3078,19th & Market,4/23/2015,Active,38.2581354,-85.7815668
+3086,Broad & Christian,6/10/2015,Active,39.94019,-75.16691
+3088,3rd & Girard,10/20/2015,Active,39.96984,-75.1418
+3093,33rd & Diamond,4/28/2016,Active,39.98837,-75.18701
+3096,29th & Dauphin,4/29/2016,Active,39.99119,-75.17975
+3097,"Berks Station, MFL",4/29/2016,Active,39.97890721,-75.13340121
+3098,10th & Federal,5/2/2016,Active,39.93431,-75.16042
+3099,4th & Washington,5/2/2016,Active,39.9339323,-75.1509772
+3100,Moyamensing & Tasker,5/2/2016,Active,39.928123,-75.150693
+3101,11th & South,5/2/2016,Active,40.7473051,-112.0147694
+3102,Pennsylvania & Fairmount Perelman Building,5/3/2016,Active,39.9676485,-75.1796135
+3104,34th & Mantua,5/3/2016,Active,39.96664,-75.19209
+3106,33rd & Dauphin,5/5/2016,Active,39.99179,-75.18637
+3107,33rd & Reservoir,5/4/2016,Active,39.98203,-75.18866
+3110,Del. River Trail & Penn St.,5/4/2016,Active,39.96175,-75.13641
+3111,"Parkside & Belmont, Case Building",5/5/2016,Active,39.97783605,-75.21321034
+3112,48th & Spruce,5/5/2016,Active,39.95373,-75.21825
+3113,Philadelphia Zoo,5/6/2016,Active,39.971728,-75.1959915
+3114,22nd & Federal,5/5/2016,Active,39.937669,-75.1801611
+3115,"19th & Girard, PTTI",5/4/2016,Active,39.9726361,-75.16757025
+3116,Barnes Foundation,12/14/2017,Active,39.9605495,-75.1726581
+3117,ParkWest Town Center,4/15/2016,Active,39.9784055,-75.2239938
+3118,"46th Street Station, MFL",4/25/2016,Active,39.9593537,-75.21343227
+3119,42nd & Lancaster,4/25/2016,Active,39.9667713,-75.2079481
+3120,31st & Girard,4/26/2016,Active,39.97522,-75.18669
+3123,22nd & Cecil B. Moore,4/27/2016,Active,39.98004,-75.17088
+3124,Race Street Pier,3/31/2016,Active,39.9530994,-75.1386646
+3125,15th & South,4/8/2016,Active,39.94393433,-75.1673685
+3150,"15th & Castle, DiSilvestro Playground",6/7/2017,Active,39.92886791,-75.17022127
+3152,"40th & Baltimore, Trolley Portal",6/5/2017,Active,39.94993319,-75.20286322
+3154,12th & Callowhill,6/7/2017,Active,39.95924,-75.15821
+3155,7th & Fitzwater,9/26/2017,Active,39.9401229,-75.1544338
+3156,20th & Market,6/8/2017,Active,29.3061555,-94.7903119
+3157,"8th & Mifflin, Bok Building",6/8/2017,Active,39.92572521,-75.15951458
+3158,Broad & Passyunk,6/8/2017,Active,39.92552,-75.16904
+3159,38th & Spruce,6/6/2017,Active,39.95121,-75.19962
+3160,38th & Market,6/6/2017,Active,39.9566414,-75.198869
+3161,30th Street Station East,6/6/2017,Active,39.9548888,-75.1808956
+3162,27th & South,6/9/2017,Active,40.7126929,-111.8494722
+3163,25th & Locust,6/9/2017,Active,39.9496367,-75.1810572
+3164,12th & Passyunk,9/26/2017,Active,39.928497,-75.164981
+3165,24th & Race SRT,9/27/2017,Active,39.9581833,-75.1780878
+3166,Frankford & Belgrade,5/9/2018,Active,39.97195,-75.13445
+3168,20th & Sansom,12/13/2017,Active,39.9513524,-75.173907
+3169,2nd & Race,9/27/2017,Active,39.95382,-75.14263
+3181,Crescent Park,6/26/2018,Active,42.9688697,-85.6668505
+3182,17th & Sansom,10/17/2018,Active,39.95081,-75.16953
+3183,15th & Kitty Hawk,6/19/2018,Active,39.889898,-75.1767794
+3184,Health Sciences Drive,11/1/2018,Active,39.945988,-75.194296
+3185,11th & Market,9/28/2018,Active,39.95169,-75.15888
+3187,20th & Race,9/25/2018,Active,39.957247,-75.1722954
+3188,"Broad & Pattison, BSL",6/19/2018,Active,39.90498568,-75.17351067
+3196,25th & Diamond,4/18/2019,Active,39.98717,-75.17477
+3197,Broad & Ritner,5/14/2019,Active,39.92083,-75.17033
+3200,Ridge & Master,6/27/2019,Active,39.97583,-75.16846
+3201,16th & Arch,9/10/2019,Active,39.9552818,-75.166123
+3203,18th & Christian,11/7/2019,Active,39.940899,-75.172899
+3204,17th & Green,11/14/2019,Active,-29.9185076,31.0148667
+3205,17th & JFK,11/23/2019,Active,39.9540842,-75.1678632
+3207,34th & Chestnut,5/20/2020,Active,39.95441,-75.192
+3208,34th & Spruce,10/5/2019,Active,39.950435,-75.193258
+3209,45th & Baltimore,9/11/2019,Active,39.9489405,-75.2126842
+3210,Broad & Diamond,8/28/2019,Active,39.98492,-75.15668
+3211,Corinthian & Poplar,2/6/2020,Active,39.97172,-75.1706
+3212,Schuylkill Banks Pergola,10/9/2020,Active,39.9636713,-75.181591
+3226,2nd & Norris,12/24/2020,Active,39.98101,-75.13721
+3235,16th & Callowhill,5/19/2021,Active,39.96028,-75.164917
+3236,24th & Pennsylvania,6/1/2021,Active,39.96566,-75.17765
+3237,Broad & Oregon,5/21/2021,Active,39.91717,-75.17096
+3238,6th & S Washington Square,6/1/2021,Active,39.94628,-75.15138
+3240,44th & Haverford,6/25/2021,Active,39.96277,-75.21185
+3241,52nd & Larchwood - Malcolm X Park,6/15/2021,Active,39.95225,-75.22637
+3243,8th & Diamond,7/8/2021,Active,39.9835,-75.14743
+3244,Broad & Carpenter,7/15/2021,Active,39.93865,-75.16674
+3245,Broad & Cecil B Moore,9/21/2021,Active,39.97887,-75.15777
+3246,50th & Baltimore,7/27/2021,Active,39.94782,-75.22301
+3247,47th & Aspen - Lucien Blackwell,7/21/2021,Active,39.9653827,-75.2150414
+3248,24th & Christian,8/2/2021,Active,39.9421178,-75.1832865
+3249,34th & Arch,8/16/2021,Active,39.95784,-75.19079
+3250,4th & Wood,9/28/2021,Active,39.95673,-75.14575
+3251,29th & Tasker,8/17/2021,Active,39.93366,-75.19319
+3252,30th & Oakford,8/23/2021,Active,39.93882,-75.19324
+3253,"26th & Moore, Vare Recreation Center",8/31/2021,Active,39.93074529,-75.18924614
+3254,16th & Montgomery,9/22/2021,Active,39.9810242,-75.160633
+3255,Broad & Chestnut,9/2/2021,Active,39.95095,-75.16438
+3256,23rd & Chestnut,9/21/2021,Active,39.9526782,-75.1777726
+3258,52nd & Chestnut,10/23/2021,Active,39.95828,-75.22424
+3259,Saunders & Pearl,11/5/2021,Active,39.95998,-75.19883
+3261,2nd & Brown,12/2/2021,Active,39.96304,-75.14099
+3263,43rd & Powelton,2/23/2022,Active,39.9586,-75.2081
+3264,8th & Spruce,5/19/2022,Active,39.94571,-75.15508
+3265,Powelton & Lancaster,3/31/2022,Active,39.95957,-75.19633
+3266,Water & Mifflin,2/15/2022,Active,39.9237,-75.14701
+3267,19th & Oregon,2/17/2022,Active,39.918,-75.1796
+3271,53rd & Baltimore,3/3/2022,Active,39.9476,-75.22946
+3272,50th & Haverford,3/11/2022,Active,39.96405,-75.22048
+3275,York & Aramingo,4/22/2022,Active,39.97576,-75.12157
+3276,12th & Fairmount,4/22/2022,Active,39.96569,-75.15679
+3277,20th & Berks,6/25/2022,Active,39.98306,-75.16738
+3278,22nd & Sedgley,6/29/2022,Active,39.99301,-75.1681
+3279,13th & Mifflin,7/6/2022,Active,39.9265,-75.1668
+3280,50th & Woodland,7/13/2022,Active,39.93968,-75.21362
+3281,Lindbergh & Wheeler,7/28/2022,Active,39.9324479,-75.2162075
+3282,10th & Nevada,7/21/2022,Active,39.98628,-75.14925
+3284,Midvale & Cresson,10/25/2022,Active,40.01112,-75.19287
+3285,5th & Willow,11/29/2022,Active,39.95946,-75.14745
+3286,6th & Brown,10/6/2022,Active,39.96409,-75.14769
+3287,49th & Chester,9/7/2022,Active,39.94367,-75.21606
+3291,Ridge & Heritage,11/3/2022,Active,40.0100801,-75.1966898
+3294,18th & Chestnut,11/9/2022,Active,39.9517294,-75.1706197
+3295,12th & Chestnut,11/3/2022,Active,40.3313265,-75.914104
+3296,16th & Chestnut,10/11/2022,Active,39.9513842,-75.167786
+3298,42nd & Woodland,11/16/2022,Active,39.94717,-75.20691
+3299,9th & Lombard,12/8/2022,Active,39.94332,-75.15698
+3300,Broad & Cherry,12/7/2022,Active,39.95511,-75.16287
+3292,5th & Wolf,1/12/2023,Active,39.92,-75.1562
+3297,18th & Vine,1/11/2023,Active,39.9581946,-75.1690371
+3301,18th & Walnut,1/4/2023,Active,39.9502683,-75.1712454
+3303,41st & Chestnut,2/8/2023,Active,39.9559272,-75.205292
+3304,7th & South,1/24/2023,Active,40.7541414,-111.8624495
+3305,22nd & Lehigh,1/30/2023,Active,39.99569,-75.1671
+3306,28th & Lehigh,1/31/2023,Active,39.99683,-75.17761
+3307,27th & Clearfield,2/3/2023,Active,40.0029245,-75.1740367
+3310,Oxford & Glenwood,2/14/2023,Active,39.98024,-75.18651
+3313,10th & Oregon,2/21/2023,Active,39.9158,-75.1643
+3314,Front & Queen,3/15/2023,Active,39.93682,-75.14492
+3315,48th & Woodland,2/24/2023,Active,39.94235,-75.21138
+3316,16th & Wolf,2/28/2023,Active,39.92255,-75.17337
+3318,City Hall South,3/9/2023,Active,34.0523908,-118.2427229
+3319,Penn Treaty Park,4/4/2023,Active,39.9661902,-75.1286832
+3320,Broad & Master,3/16/2023,Active,39.9746,-75.15917
+3321,20th & Cuthbert,3/22/2023,Active,39.95485,-75.17298
+3322,7th & Passyunk,5/18/2023,Active,39.93638,-75.15526
+3323,Manayunk Bridge,4/11/2023,Active,40.025427,-75.2266188
+3324,Kelly Drive - Strawberry Mansion Bridge,3/29/2023,Active,39.99484,-75.19242
+3326,M.L.K. Drive - Strawberry Mansion Bridge,4/5/2023,Active,39.99198,-75.19944
+3327,York & Gaul,6/13/2023,Active,39.97759,-75.12442
+3328,Kelly Drive Grandstand,3/30/2023,Active,39.98798,-75.1995
+3329,Cresson & Levering,4/27/2023,Active,40.0265716,-75.2246069
+3331,Girard & Palmer,6/21/2023,Active,39.9709947,-75.1282398
+3332,32nd & Allegheny,6/28/2023,Active,40.00537,-75.18143
+3334,7th & Dickinson,5/16/2023,Active,39.9302,-75.15636
+3335,Main & Shurs,6/1/2023,Active,40.0223414,-75.2179922
+3336,36th & Filbert,5/24/2023,Active,39.95719,-75.19388
+3337,6th & Master,5/10/2023,Active,39.9731084,-75.146095
+3338,54th & Cedar,5/30/2023,Active,39.95098,-75.23035
+3340,27th & Pennsylvania,6/15/2023,Active,39.969116,-75.181556
+3268,10th & Oxford,9/21/2023,Active,39.97633,-75.15101
+3325,Cedar & Norris,7/31/2023,Active,39.9768,-75.12764
+3333,18th & JFK Curbside,7/18/2023,Active,39.9541,-75.16965
+3341,York & Trenton,7/11/2023,Active,39.98131,-75.12732
+3342,22nd & Spring Garden,7/13/2023,Active,39.9639,-75.17385
+3344,56th & Chestnut,7/27/2023,Active,39.95961,-75.23354
+3345,5th & Spring Garden,8/3/2023,Active,39.9617,-75.14667
+3346,6th & Chestnut,8/10/2023,Active,38.2491348,-85.7613351
+3347,9th & Race,8/17/2023,Active,39.95484,-75.15449
+3349,25th & Wharton,8/31/2023,Active,39.93651,-75.18621
+3350,Broad & Lehigh,9/5/2023,Active,39.99415,-75.15527
+3351,12th & Cambria,9/21/2023,Active,39.99655,-75.14991
+3353,"Broad & Ontario, Temple Hospital",9/28/2023,Active,40.00496703,-75.15233605
+3352,Broad & Allegheny,12/1/2023,Active,40.00143,-75.15256
+3354,58th & Spruce,10/11/2023,Active,39.95628,-75.2387
+3356,12th & Normandy,10/17/2023,Active,39.8933715,-75.1720359
+3357,10th & Packer,10/19/2023,Active,39.9104,-75.16588
+3359,17th & Locust,11/1/2023,Active,39.94888,-75.16978
+3360,Broad & Reed,11/7/2023,Active,39.93304625,-75.16822625
+3361,"18th & Fernon, Aquinas Center",12/5/2023,Active,39.93085098,-75.1747301
+3365,"32nd & Baring, Drexel Park",11/28/2023,Active,39.96173581,-75.18787687
+3368,23rd & Master,12/20/2023,Active,39.9764605,-75.1735994
+3362,13th & Locust,1/8/2024,Active,39.9478946,-75.1624536
+3363,13th & Spruce,2/12/2024,Active,40.0190887,-105.278907
+3369,Ridge & Ferry,1/4/2024,Active,40.00772,-75.19194
+3370,Pencoyd Bridge,1/5/2024,Active,40.0166353,-75.2139046
+3371,9th & Arch,1/11/2024,Active,39.9534062,-75.1543217
+3372,24th & Jackson,1/25/2024,Active,39.92528,-75.18672
+3373,11th & Wood,2/1/2024,Active,39.95817,-75.15668
+3375,"Spring Garden Station, MFL",1/30/2024,Active,39.96082015,-75.14027273
+3376,Thompson & Franklin,2/6/2024,Active,39.97183,-75.14878
+3378,4th & Arch,2/22/2024,Active,39.9523801,-75.1472627
+3381,48th & Baltimore,3/27/2024,Active,39.94845,-75.21807
+3382,Walnut & Rittenhouse,4/17/2024,Active,39.950399,-75.173042
+3383,"3rd & Wildey, Liberty Lands Park",4/23/2024,Active,39.96694661,-75.14209767
+3374,26th & Poplar,4/25/2024,Active,39.9727792,-75.1791086
+3387,6th & Girard,7/11/2024,Active,39.97012,-75.14666
+3388,8th & Brown,7/16/2024,Active,39.96634,-75.15097
+3390,"52nd St Station, MFL",8/1/2024,Active,39.96000914,-75.22440932
+3391,54th & City Ave,9/4/2024,Active,39.99667,-75.23482
+3392,30th & Reed,8/14/2024,Active,39.93633,-75.19447
+3393,2nd & George,8/28/2024,Active,39.96727,-75.13999
+3394,Broad & Snyder,9/11/2024,Active,39.924,-75.16959
+3395,12th & Carpenter,9/17/2024,Active,39.93866,-75.16351
+3396,21st & Passyunk,10/3/2024,Active,39.92327,-75.1821
+3397,21st & Washington,10/16/2024,Active,39.93906,-75.17824
+3398,4th & Oregon,12/13/2024,Active,39.91551,-75.15474
+3385,8th & Chestnut,1/30/2025,Active,39.94974,-75.15424
+3389,Grays Ferry & Pemberton,2/24/2025,Active,39.94431,-75.18128
+3399,American & Oxford,3/5/2025,Active,39.975011,-75.1399684
+3400,12th & Walnut,2/25/2025,Active,39.949,-75.16081
+3405,Fitzwater & Juniper,2/27/2025,Active,39.94167,-75.16502
+3407,American & Berks,3/7/2025,Active,39.9785,-75.13911
+3408,2nd & Snyder,3/13/2025,Active,39.9216537,-75.1500628
+3409,"7th & Race, Franklin Square",3/25/2025,Active,39.95509197,-75.15128537
+3410,"51st & Regent, Kingsessing Library",3/26/2025,Active,39.94270028,-75.2186855
+3411,57th & Westminster,3/14/2025,Active,39.96693,-75.23359
