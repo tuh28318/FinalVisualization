@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     Promise.all([
-        d3.json("updated_philazip.geojson"), // GeoJSON for ZIP boundaries
-        d3.csv("busstops.csv"),              // CSV for bus stops
-        d3.csv("UPDATEDIndego.csv"),         // CSV for Indego stations
-        d3.json("septabus_filtered.geojson") // GeoJSON for SEPTA bus routes
-    ]).then(function ([geojson, busStops, indigoStations, busRoutes]) {
-        console.log("Loaded ZIP boundaries, bus stops, Indigo stations, and bus routes.");
+        d3.json("PhiladelphiaMap.geojson"), // GeoJSON for ZIP boundaries
+        d3.csv("IndegoStations.csv"),      // CSV for Indego stations
+        d3.json("SEPTABusLines.geojson")   // GeoJSON for SEPTA bus routes
+    ]).then(function ([geojson, indigoStations, busRoutes]) {
+        // console.log("Loaded ZIP boundaries, Indigo stations, and bus routes.");
 
         const width = window.innerWidth;   // Get the window width
         const height = window.innerHeight; // Get the window height
@@ -20,8 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Set up the Mercator projection for the map with the center at Philadelphia
         const projection = d3.geoMercator()
-            .center([-75.1652, 39.9526])  // Center on Philadelphia
-            .scale(50000); // Set an appropriate scale for the map
+            .center([-75.1652, 40.0000])  // Center on Philadelphia
+            .scale(100000); // Set an appropriate scale for the map
 
         const path = d3.geoPath().projection(projection);
 
@@ -54,22 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
             svg.transition().call(zoom.transform, d3.zoomIdentity); // Reset zoom to default scale
         });
 
-        // Create an RBush spatial index for the bus stops to improve search performance
-        const busStopIndex = new RBush();
-        const busStopPoints = busStops.map(d => {
-            const lon = parseFloat(d.Lon);  // Get longitude of bus stop
-            const lat = parseFloat(d.Lat);  // Get latitude of bus stop
-            return {
-                minX: lon,
-                minY: lat,
-                maxX: lon,
-                maxY: lat,
-                lon,
-                lat
-            };
-        });
-        busStopIndex.load(busStopPoints); // Load the bus stop data into the spatial index
-
         // Count the number of bus stops within each ZIP code boundary
         geojson.features.forEach(feature => {
             const bounds = d3.geoBounds(feature); // Get the bounding box of the ZIP region
@@ -78,23 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const maxLon = bounds[1][0];
             const maxLat = bounds[1][1];
 
-            // Use the spatial index to find potential bus stops within the bounding box
-            const candidates = busStopIndex.search({
-                minX: minLon,
-                minY: minLat,
-                maxX: maxLon,
-                maxY: maxLat
-            });
-
-            let count = 0;
-            // Check if the bus stops are inside the ZIP code region
-            candidates.forEach(stop => {
-                if (d3.geoContains(feature, [stop.lon, stop.lat])) {
-                    count++; // Increment the bus stop count for this ZIP code
-                }
-            });
-
-            feature.properties.busStopCount = count; // Store the bus stop count in the feature properties
+            // Count the number of bus stops inside each ZIP code region (This part is not needed anymore)
         });
 
         // Draw the ZIP code boundaries on the map
@@ -118,10 +85,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     .attr("font-size", "12px")
                     .attr("id", "zip-label")
                     .text(`ZIP: ${d.properties.CODE}`); // Show ZIP code in the label
-                    /*
-                    // Old version showing bus stop count
-                    .text(`Bus Stops: ${d.properties.busStopCount}`);
-                    */
             })
             .on("mouseout", function () {
                 // Reset the ZIP region color and remove the label on mouseout
@@ -186,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
         // Optional: Add high-speed train routes (if data is available)
-        d3.json("Highspeed_Lines.geojson").then(trainData => {
+        d3.json("SEPTAHighspeedLines.geojson").then(trainData => {
             g.selectAll(".train-line")
                 .data(trainData.features) // Bind train route data to the path elements
                 .enter()
@@ -196,11 +159,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 .attr("fill", "none") // No fill for train routes
                 .attr("stroke", "orange") // Set the stroke color for train routes
                 .attr("stroke-width", 1.5); // Set the stroke width for train routes
-        }).catch(error => {
-            console.error("Error loading train route data:", error);
         });
+        // .catch(error => {
+        //     console.error("Error loading train route data:", error);
+        // });
 
     }).catch(function (error) {
-        console.error("Error loading data:", error); // Handle any data loading errors
+        // console.error("Error loading data:", error); // Handle any data loading errors
     });
 });
