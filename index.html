@@ -18,7 +18,8 @@
       width: 100%;
       min-height: 100vh; /* Full viewport height */
       overflow: auto; /* Allow scrolling */
-      padding: 20px; /* Add some padding around the whole container */
+      padding: 10px; /* Reduced padding for the main container */
+      gap: 20px;
     }
 
     /* Visualizations container (maps and bubble chart) */
@@ -26,28 +27,41 @@
       display: flex;
       flex-direction: column;
       width: 100%;
-      padding: 20px;
+      padding: 0; /* Removed extra padding around visualization container */
       background: #f9f9f9;
       overflow: hidden; /* Prevent content from spilling out */
     }
 
-    /* Make sure each visualization has a fixed height and doesn't overflow */
-    #map, #bubble-chart, #electric-ratio-map {
-      width: 100%;
-      margin-bottom: 20px; /* Space between elements */
-      overflow: hidden; /* Prevent overflow */
-      border: 2px solid #4e4e4e; /* Border around visualizations */
-      border-radius: 8px;
-      padding: 10px;
-    }
+/* Apply a fixed height for the map if you want to prevent it from taking up the entire viewport */
+#map {
+  width: 100%;
+  height: calc(100vh); /* Example to make the map take 80% of the viewport height */
+  margin-bottom: 20px; /* Space between map and next element */
+  overflow: hidden; /* Prevent overflow (you can adjust this depending on your needs) */
+  border: 2px solid #f9f9f9; /* Border around map */
+  border-radius: 8px;
+  padding: 0; /* Removed extra padding to avoid cutting off the map */
+}
+
+/* If you want to apply the same height behavior to bubble-chart and electric-ratio-map */
+#bubble-chart, #electric-ratio-map {
+  width: 100%;
+  height: calc(100vh); /* Keep full height for other visualizations */
+  margin-bottom: 20px;
+  overflow: hidden;
+  border: 2px solid #f9f9f9;
+  border-radius: 8px;
+  padding: 0;
+}
+
 
     /* Text section on the right */
     #text-container {
       padding: 20px;
-      background: #ffffff;
+      background: #f9f9f9;
       overflow-y: auto; /* Allow scrolling if content overflows */
       height: 100%; /* Fill container */
-      border-left: 2px solid #4e4e4e; /* Border to separate from visualizations */
+      border-left: 2px solid #f9f9f9; /* Border to separate from visualizations */
     }
 
     h1 {
@@ -62,7 +76,17 @@
       margin: 0;
     }
 
-    #zoom-controls {
+    .viz-container {
+      width: 100%;
+      margin-bottom: 20px;
+      background: #f9f9f9;
+      padding: 0; /* Removed extra padding */
+      border-radius: 8px;
+      border: 2px solid #eee;
+      position: relative; /* So zoom buttons inside can be positioned absolutely */
+    }
+
+    .zoom-controls {
       position: absolute;
       top: 20px;
       left: 20px;
@@ -76,7 +100,7 @@
       z-index: 10;
     }
 
-    #zoom-controls button {
+    .zoom-controls button {
       background: white;
       border: none;
       padding: 10px;
@@ -87,11 +111,11 @@
       text-align: center;
     }
 
-    #zoom-controls button:hover {
+    .zoom-controls button:hover {
       background: #eee;
     }
 
-    #zoom-controls button:active {
+    .zoom-controls button:active {
       background: #ddd;
     }
   </style>
@@ -101,31 +125,44 @@
   <div id="main-container">
     <!-- Visualizations container -->
     <div id="visualizations-container">
-      <!-- Main map for Philadelphia ZIP code boundaries -->
-      <div id="map">
-        <h1>Philadelphia ZIP Code Boundaries</h1>
-        <div id="zoom-controls">
-          <button id="zoom-in">+</button>
-          <button id="zoom-out">-</button>
-          <button id="reset-zoom">⟳</button>
+      
+      <!-- Map Container -->
+      <!-- Map Container -->
+<div class="viz-container map-container" id="map">
+  <div class="zoom-controls" id="zoom-controls-map">
+    <button class="zoom-in">+</button>
+    <button class="zoom-out">-</button>
+    <button class="reset-zoom">⟳</button>
+  </div>
+</div>
+
+  
+      <!-- Bubble Chart Container -->
+      <div class="viz-container" id="bubble-chart-container">
+        <div id="bubble-chart">
+          <!-- (bubble chart here) -->
         </div>
       </div>
-
-      <!-- Bubble chart container -->
-      <div id="bubble-chart"></div>
-
-      <!-- Electric ratio map container -->
-      <div id="electric-ratio-map"></div>
+  
+      <!-- Electric Ratio Map Container -->
+      <div class="viz-container" id="electric-ratio-map-container">
+        <div id="electric-ratio-map"></div>
+        <!-- Zoom buttons for the electric ratio map -->
+        <div class="zoom-controls" id="zoom-controls-electric">
+          <button class="zoom-in">+</button>
+          <button class="zoom-out">-</button>
+          <button class="reset-zoom">⟳</button>
+        </div>
+      </div>
     </div>
-
-    <!-- Text section on the right -->
+  
+    <!-- Text section -->
     <div id="text-container">
-      <!-- Add your text content here -->
       <h2>Additional Information</h2>
-      <p>Here you can add any additional details, explanations, or analysis of the data and visualizations presented on the left side.</p>
+      <p>Here you can add any additional details, explanations, or analysis of the data and visualizations presented.</p>
     </div>
   </div>
-
+  
   <!-- Load D3.js -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
