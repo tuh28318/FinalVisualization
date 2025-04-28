@@ -4,8 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
         d3.csv("IndegoStations.csv"),      // CSV for Indego stations
         d3.csv("sorted_with_lat_lon.csv")  // CSV with electric and standard counts and lat/lon
     ]).then(function ([geojson, indigoStations, stationData]) {
-        const width = window.innerWidth;   // Get the window width
-        const height = window.innerHeight; // Get the window height
+        const container = document.getElementById('map');
+        const width = container.clientWidth;
+        const height = container.clientHeight;
 
         // Create an SVG element for the map
         const svg = d3.select("#electric-ratio-map")
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Set up the Mercator projection for the map with the center at Philadelphia
         const projection = d3.geoMercator()
             .center([-75.1652, 40.0000])  // Center on Philadelphia
-            .scale(100000); // Set an appropriate scale for the map
+            .scale(180000); // Set an appropriate scale for the map
 
         const path = d3.geoPath().projection(projection);
 
@@ -26,27 +27,29 @@ document.addEventListener("DOMContentLoaded", function () {
         const zoom = d3.zoom()
             .scaleExtent([1, 20]) // Limit the zoom-in and zoom-out scale range
             .on("zoom", (event) => {
-                const transform = event.transform;
-                const newProjection = projection.scale(transform.k * 50000); // Scale the map based on zoom level
-                path.projection(newProjection); // Update path projection
-                g.attr("transform", transform); // Apply the zoom transform to the group
+                g.attr("transform", event.transform); // Just transform the group
             });
 
         // Apply zoom behavior to the SVG container
         svg.call(zoom);
 
+        // Select the zoom buttons inside the electric map controls
+        const zoomInElectric = document.querySelector("#zoom-controls-electric .zoom-in");
+        const zoomOutElectric = document.querySelector("#zoom-controls-electric .zoom-out");
+        const resetZoomElectric = document.querySelector("#zoom-controls-electric .reset-zoom");
+
         // Zoom in button event handler
-        document.getElementById("zoom-in").addEventListener("click", () => {
+        zoomInElectric.addEventListener("click", () => {
             svg.transition().call(zoom.scaleBy, 1.2); // Zoom in by a factor of 1.2
         });
 
         // Zoom out button event handler
-        document.getElementById("zoom-out").addEventListener("click", () => {
+        zoomOutElectric.addEventListener("click", () => {
             svg.transition().call(zoom.scaleBy, 0.8); // Zoom out by a factor of 0.8
         });
 
         // Reset zoom button event handler
-        document.getElementById("reset-zoom").addEventListener("click", () => {
+        resetZoomElectric.addEventListener("click", () => {
             svg.transition().call(zoom.transform, d3.zoomIdentity); // Reset zoom to default scale
         });
 
@@ -59,22 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .attr("d", path) // Set the path data based on the projection
             .attr("fill", "gray") // Set the fill color of the ZIP regions
             .attr("stroke", "black") // Set the stroke color
-            .attr("stroke-width", 1) // Set the stroke width
-            .on("mouseover", function (event, d) {
-                d3.select(this).attr("fill", "orange");
-                const [x, y] = d3.pointer(event);
-                g.append("text")
-                    .attr("x", x)
-                    .attr("y", y - 10)
-                    .attr("fill", "black")
-                    .attr("font-size", "12px")
-                    .attr("id", "zip-label")
-                    .text(`ZIP: ${d.properties.CODE}`);
-            })
-            .on("mouseout", function () {
-                d3.select(this).attr("fill", "gray");
-                g.select("#zip-label").remove();
-            });
+            .attr("stroke-width", 1); // Set the stroke width
 
         // Add Indigo bike stations as circles with color based on electric_to_standard_ratio
         stationData.forEach(station => {
@@ -89,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .attr("cx", x)
                 .attr("cy", y)
                 .attr("r", 5) // Set the radius
-                .attr("fill", electricCount > standardCount ? "darkred" : "lightgreen") // Color based on bike type
+                .attr("fill", electricCount > standardCount ? "#93d500" : "#002169") // Color based on bike type
                 .on("mouseover", function () {
                     d3.select(this)
                         .raise()
