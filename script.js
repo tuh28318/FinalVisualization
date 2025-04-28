@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
     Promise.all([
         d3.json("PhiladelphiaMap.geojson"), // GeoJSON for ZIP boundaries
         d3.csv("IndegoStations.csv"),      // CSV for Indego stations
-        d3.json("SEPTABusLines.geojson")   // GeoJSON for SEPTA bus routes
-    ]).then(function ([geojson, indigoStations, busRoutes]) {
-        // console.log("Loaded ZIP boundaries, Indigo stations, and bus routes.");
+        d3.csv("start_station_counts_with_names.csv") // CSV for station counts
+    ]).then(function ([geojson, indigoStations, stationCounts]) {
+        // console.log("Loaded ZIP boundaries, Indigo stations, and station counts.");
 
         const width = window.innerWidth;   // Get the window width
         const height = window.innerHeight; // Get the window height
@@ -53,16 +53,11 @@ document.addEventListener("DOMContentLoaded", function () {
             svg.transition().call(zoom.transform, d3.zoomIdentity); // Reset zoom to default scale
         });
 
-        // Count the number of bus stops within each ZIP code boundary
-        geojson.features.forEach(feature => {
-            const bounds = d3.geoBounds(feature); // Get the bounding box of the ZIP region
-            const minLon = bounds[0][0];
-            const minLat = bounds[0][1];
-            const maxLon = bounds[1][0];
-            const maxLat = bounds[1][1];
-
-            // Count the number of bus stops inside each ZIP code region (This part is not needed anymore)
-        });
+        // Create a color scale for the station counts
+        const countValues = stationCounts.map(d => +d.count); // Extract the counts as numbers
+        const countColorScale = d3.scaleSequential()
+            .domain([d3.min(countValues), d3.max(countValues)]) // Set domain to the min and max counts
+            .range(["lightblue", "darkblue"]); // Use a color range from light to dark green
 
         // Draw the ZIP code boundaries on the map
         g.selectAll("path.zip")
@@ -71,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .append("path") // Append a new path for each ZIP region
             .attr("class", "zip")
             .attr("d", path) // Set the path data based on the projection
-            .attr("fill", "lightblue") // Set the fill color of the ZIP regions
+            .attr("fill", "gray") // Set the fill color of the ZIP regions
             .attr("stroke", "black") // Set the stroke color
             .attr("stroke-width", 1) // Set the stroke width
             .on("mouseover", function (event, d) {
@@ -88,83 +83,44 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .on("mouseout", function () {
                 // Reset the ZIP region color and remove the label on mouseout
-                d3.select(this).attr("fill", "lightblue");
+                d3.select(this).attr("fill", "gray");
                 g.select("#zip-label").remove(); // Remove the label
             });
 
-        // Add Indigo bike stations as green dots
+        // Add Indigo bike stations as circles with color based on count
         indigoStations.forEach(station => {
             const lat = parseFloat(station.Latitude); // Get the latitude of the station
             const lon = parseFloat(station.Longitude); // Get the longitude of the station
             const [x, y] = projection([lon, lat]); // Project the coordinates onto the map
 
+            // Find the station count from the start_station_with_names.csv
+            const stationCount = stationCounts.find(d => d.Station_Name === station.Station_Name);
+            const count = stationCount ? +stationCount.count : 0; // Get the count, default to 0 if not found
+
             g.append("circle") // Append a circle for each station
                 .attr("cx", x) // Set the x-coordinate
                 .attr("cy", y) // Set the y-coordinate
-                .attr("r", 2) // Set the radius
-                .attr("fill", "green") // Set the fill color to green
+                .attr("r", 3) // Set the radius
+                .attr("fill", count > 0 ? countColorScale(count) : "lightgray") // Set color based on count
                 .on("mouseover", function () {
-                    // Enlarge the dot and display the station name on mouseover
-                    d3.select(this).attr("r", 7);
+                    // Enlarge the dot and display the station name and count on mouseover
+                    d3.select(this).attr("r", 10);
                     g.append("text")
                         .attr("x", x + 10)
                         .attr("y", y - 10)
                         .attr("fill", "black")
                         .attr("font-size", "12px")
                         .attr("id", "bike-label")
-                        .text(station.Station_Name); // Show the station name
+                        .text(`${station.Station_Name} - Count: ${count}`); // Show the station name and count
                 })
                 .on("mouseout", function () {
-                    // Reset the dot size and remove the station name on mouseout
-                    d3.select(this).attr("r", 2);
-                    g.select("#bike-label").remove(); // Remove the station name label
+                    // Reset the dot size and remove the station name and count on mouseout
+                    d3.select(this).attr("r", 3);
+                    g.select("#bike-label").remove(); // Remove the label
                 });
         });
 
-        // Draw SEPTA bus routes
-        g.selectAll(".bus-route")
-            .data(busRoutes.features) // Bind bus route data to the path elements
-            .enter()
-            .append("path") // Append a path for each bus route
-            .attr("class", "bus-route")
-            .attr("d", path) // Set the path data based on the projection
-            .attr("fill", "none") // No fill for bus routes
-            .attr("stroke", d => d.properties.route_color || "#000000") // Set the stroke color based on route color
-            .attr("stroke-width", 1.5) // Set the stroke width
-            .attr("opacity", 0.7) // Set the opacity for better visibility
-            .on("mouseover", function(event, d) {
-                // Display the route name on mouseover
-                const [x, y] = d3.pointer(event);
-                g.append("text")
-                    .attr("x", x)
-                    .attr("y", y - 10)
-                    .attr("fill", "black")
-                    .attr("font-size", "12px")
-                    .attr("id", "route-label")
-                    .text(d.properties.route_long_name || d.properties.route_short_name || "Unknown Route");
-            })
-            .on("mouseout", function() {
-                // Remove the route name label on mouseout
-                g.select("#route-label").remove();
-            });
-
-        // Optional: Add high-speed train routes (if data is available)
-        d3.json("SEPTAHighspeedLines.geojson").then(trainData => {
-            g.selectAll(".train-line")
-                .data(trainData.features) // Bind train route data to the path elements
-                .enter()
-                .append("path") // Append a path for each train route
-                .attr("class", "train-line")
-                .attr("d", path) // Set the path data based on the projection
-                .attr("fill", "none") // No fill for train routes
-                .attr("stroke", "orange") // Set the stroke color for train routes
-                .attr("stroke-width", 1.5); // Set the stroke width for train routes
-        });
-        // .catch(error => {
-        //     console.error("Error loading train route data:", error);
-        // });
-
     }).catch(function (error) {
-        // console.error("Error loading data:", error); // Handle any data loading errors
+        console.error("Error loading data:", error); // Handle any data loading errors
     });
 });
