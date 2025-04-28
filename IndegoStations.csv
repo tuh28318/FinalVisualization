@@ -36,7 +36,7 @@ Station_ID,Station_Name,Day of Go_live_date,Status,Latitude,Longitude
 3051,23rd & Fairmount,4/23/2015,Active,39.96744,-75.17507
 3052,9th & Locust,4/23/2015,Active,39.9473232,-75.1569003
 3053,Point Breeze & Tasker,4/23/2015,Active,39.9323324,-75.181495
-3054,Rodin Museum,4/23/2015,Active,48.8547473,2.315867
+3054,Rodin Museum,4/23/2015,Active,39.96250674,-75.17419888
 3055,8th & Market,4/28/2015,Active,39.9512871,-75.1535469
 3056,Broad & Oxford,4/23/2015,Active,39.97669,-75.15813
 3057,Philadelphia Museum of Art,4/23/2015,Active,39.9655639,-75.1815121
@@ -55,9 +55,9 @@ Station_ID,Station_Name,Day of Go_live_date,Status,Latitude,Longitude
 3072,Front & Carpenter,4/23/2015,Active,39.93445,-75.14541
 3073,9th & Spring Garden,4/28/2015,Active,39.96143,-75.15242
 3074,44th & Walnut,4/28/2015,Active,39.95511,-75.20987
-3075,Fairmount & Ridge,4/28/2015,Active,44.6400861,-63.6337888
+3075,Fairmount & Ridge,4/28/2015,Active,39.96805065,-75.16131604
 3077,17th & Girard,4/29/2015,Active,39.97207,-75.16351
-3078,19th & Market,4/23/2015,Active,38.2581354,-85.7815668
+3078,19th & Market,4/23/2015,Active,39.95370656,-75.17189687
 3086,Broad & Christian,6/10/2015,Active,39.94019,-75.16691
 3088,3rd & Girard,10/20/2015,Active,39.96984,-75.1418
 3093,33rd & Diamond,4/28/2016,Active,39.98837,-75.18701
@@ -66,7 +66,7 @@ Station_ID,Station_Name,Day of Go_live_date,Status,Latitude,Longitude
 3098,10th & Federal,5/2/2016,Active,39.93431,-75.16042
 3099,4th & Washington,5/2/2016,Active,39.9339323,-75.1509772
 3100,Moyamensing & Tasker,5/2/2016,Active,39.928123,-75.150693
-3101,11th & South,5/2/2016,Active,40.7473051,-112.0147694
+3101,11th & South,5/2/2016,Active,39.94302384,-75.1595674
 3102,Pennsylvania & Fairmount Perelman Building,5/3/2016,Active,39.9676485,-75.1796135
 3104,34th & Mantua,5/3/2016,Active,39.96664,-75.19209
 3106,33rd & Dauphin,5/5/2016,Active,39.99179,-75.18637
@@ -89,20 +89,20 @@ Station_ID,Station_Name,Day of Go_live_date,Status,Latitude,Longitude
 3152,"40th & Baltimore, Trolley Portal",6/5/2017,Active,39.94993319,-75.20286322
 3154,12th & Callowhill,6/7/2017,Active,39.95924,-75.15821
 3155,7th & Fitzwater,9/26/2017,Active,39.9401229,-75.1544338
-3156,20th & Market,6/8/2017,Active,29.3061555,-94.7903119
+3156,20th & Market,6/8/2017,Active,39.95393935,-75.17404536
 3157,"8th & Mifflin, Bok Building",6/8/2017,Active,39.92572521,-75.15951458
 3158,Broad & Passyunk,6/8/2017,Active,39.92552,-75.16904
 3159,38th & Spruce,6/6/2017,Active,39.95121,-75.19962
 3160,38th & Market,6/6/2017,Active,39.9566414,-75.198869
 3161,30th Street Station East,6/6/2017,Active,39.9548888,-75.1808956
-3162,27th & South,6/9/2017,Active,40.7126929,-111.8494722
+3162,27th & South,6/9/2017,Active,39.94620737,-75.18490198
 3163,25th & Locust,6/9/2017,Active,39.9496367,-75.1810572
 3164,12th & Passyunk,9/26/2017,Active,39.928497,-75.164981
 3165,24th & Race SRT,9/27/2017,Active,39.9581833,-75.1780878
 3166,Frankford & Belgrade,5/9/2018,Active,39.97195,-75.13445
 3168,20th & Sansom,12/13/2017,Active,39.9513524,-75.173907
 3169,2nd & Race,9/27/2017,Active,39.95382,-75.14263
-3181,Crescent Park,6/26/2018,Active,42.9688697,-85.6668505
+3181,Crescent Park,6/26/2018,Active,39.8968043,-75.17506468
 3182,17th & Sansom,10/17/2018,Active,39.95081,-75.16953
 3183,15th & Kitty Hawk,6/19/2018,Active,39.889898,-75.1767794
 3184,Health Sciences Drive,11/1/2018,Active,39.945988,-75.194296
@@ -114,7 +114,7 @@ Station_ID,Station_Name,Day of Go_live_date,Status,Latitude,Longitude
 3200,Ridge & Master,6/27/2019,Active,39.97583,-75.16846
 3201,16th & Arch,9/10/2019,Active,39.9552818,-75.166123
 3203,18th & Christian,11/7/2019,Active,39.940899,-75.172899
-3204,17th & Green,11/14/2019,Active,-29.9185076,31.0148667
+3204,17th & Green,11/14/2019,Active,39.96459614,-75.16573997
 3205,17th & JFK,11/23/2019,Active,39.9540842,-75.1678632
 3207,34th & Chestnut,5/20/2020,Active,39.95441,-75.192
 3208,34th & Spruce,10/5/2019,Active,39.950435,-75.193258
@@ -176,7 +176,7 @@ Station_ID,Station_Name,Day of Go_live_date,Status,Latitude,Longitude
 3297,18th & Vine,1/11/2023,Active,39.9581946,-75.1690371
 3301,18th & Walnut,1/4/2023,Active,39.9502683,-75.1712454
 3303,41st & Chestnut,2/8/2023,Active,39.9559272,-75.205292
-3304,7th & South,1/24/2023,Active,40.7541414,-111.8624495
+3304,7th & South,1/24/2023,Active,39.94234605,-75.15394721
 3305,22nd & Lehigh,1/30/2023,Active,39.99569,-75.1671
 3306,28th & Lehigh,1/31/2023,Active,39.99683,-75.17761
 3307,27th & Clearfield,2/3/2023,Active,40.0029245,-75.1740367
@@ -185,7 +185,7 @@ Station_ID,Station_Name,Day of Go_live_date,Status,Latitude,Longitude
 3314,Front & Queen,3/15/2023,Active,39.93682,-75.14492
 3315,48th & Woodland,2/24/2023,Active,39.94235,-75.21138
 3316,16th & Wolf,2/28/2023,Active,39.92255,-75.17337
-3318,City Hall South,3/9/2023,Active,34.0523908,-118.2427229
+3318,City Hall South,3/9/2023,Active,39.9518186,-75.16395445
 3319,Penn Treaty Park,4/4/2023,Active,39.9661902,-75.1286832
 3320,Broad & Master,3/16/2023,Active,39.9746,-75.15917
 3321,20th & Cuthbert,3/22/2023,Active,39.95485,-75.17298
@@ -211,7 +211,7 @@ Station_ID,Station_Name,Day of Go_live_date,Status,Latitude,Longitude
 3342,22nd & Spring Garden,7/13/2023,Active,39.9639,-75.17385
 3344,56th & Chestnut,7/27/2023,Active,39.95961,-75.23354
 3345,5th & Spring Garden,8/3/2023,Active,39.9617,-75.14667
-3346,6th & Chestnut,8/10/2023,Active,38.2491348,-85.7613351
+3346,6th & Chestnut,8/10/2023,Active,39.94899395,-75.15100906
 3347,9th & Race,8/17/2023,Active,39.95484,-75.15449
 3349,25th & Wharton,8/31/2023,Active,39.93651,-75.18621
 3350,Broad & Lehigh,9/5/2023,Active,39.99415,-75.15527
@@ -227,7 +227,7 @@ Station_ID,Station_Name,Day of Go_live_date,Status,Latitude,Longitude
 3365,"32nd & Baring, Drexel Park",11/28/2023,Active,39.96173581,-75.18787687
 3368,23rd & Master,12/20/2023,Active,39.9764605,-75.1735994
 3362,13th & Locust,1/8/2024,Active,39.9478946,-75.1624536
-3363,13th & Spruce,2/12/2024,Active,40.0190887,-105.278907
+3363,13th & Spruce,2/12/2024,Active,39.9466989,-75.16260232
 3369,Ridge & Ferry,1/4/2024,Active,40.00772,-75.19194
 3370,Pencoyd Bridge,1/5/2024,Active,40.0166353,-75.2139046
 3371,9th & Arch,1/11/2024,Active,39.9534062,-75.1543217
