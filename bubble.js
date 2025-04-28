@@ -16,7 +16,7 @@ const tooltip = d3.select("body")
 d3.csv("passholder_type_counts.csv").then(function(data) {
 
   // Define your custom colors
-  const customColors = ["#0082ca", "#002169","#5f8a01", "#93d500", "#004f7a"];
+  const customColors = ["#0082ca", "#002169","#587f00", "#93d500", "#4c6396"];
 
   // Create the color scale
   const colorScale = d3.scaleOrdinal()
@@ -26,7 +26,7 @@ d3.csv("passholder_type_counts.csv").then(function(data) {
   // Define size scale based on counts
   const sizeScale = d3.scaleSqrt()
                       .domain([0, d3.max(data, d => +d.count)])
-                      .range([20, 100]);
+                      .range([30, 150]);
 
   // Force simulation
   const simulation = d3.forceSimulation(data)
@@ -45,19 +45,38 @@ d3.csv("passholder_type_counts.csv").then(function(data) {
     .attr("fill", d => colorScale(d.passholder_type))
     .attr("stroke", "#333")
     .attr("stroke-width", 1)
-    .attr("opacity", 0.8)
+    .attr("opacity", 1)
     .on("mouseover", function(event, d) {
-      d3.select(this).attr("opacity", 1);
-      tooltip.style("visibility", "visible")
-             .text(d.passholder_type + ": " + d.count);
+      // Bring the bubble and its label to the front
+      d3.select(this).raise(); // raise the bubble
+      labels.filter(l => l.passholder_type === d.passholder_type).raise(); // raise the label
+    
+      // Animate bubble bigger
+      d3.select(this)
+        .transition()
+        .duration(300)
+        .attr("r", sizeScale(d.count) * 1.2);
+    
+      // Calculate percentage
+      const total = d3.sum(data, d => +d.count);
+      const percentage = ((d.count / total) * 100).toFixed(1) + "%";
+    
+      // Update label text
+      labels
+        .filter(l => l.passholder_type === d.passholder_type)
+        .text(percentage);
     })
-    .on("mousemove", function(event) {
-      tooltip.style("top", (event.pageY - 10) + "px")
-             .style("left", (event.pageX + 10) + "px");
-    })
-    .on("mouseout", function() {
-      d3.select(this).attr("opacity", 0.8);
-      tooltip.style("visibility", "hidden");
+    .on("mouseout", function(event, d) {
+      // Animate bubble smaller
+      d3.select(this)
+        .transition()
+        .duration(300)
+        .attr("r", sizeScale(d.count));
+    
+      // Reset label text
+      labels
+        .filter(l => l.passholder_type === d.passholder_type)
+        .text(d.passholder_type);
     });
 
   // Add text inside bubbles
