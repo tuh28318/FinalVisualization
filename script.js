@@ -104,20 +104,42 @@ document.addEventListener("DOMContentLoaded", function () {
                 .attr("fill", count > 0 ? countColorScale(count) : "lightgray") // Set color based on count
                 .on("mouseover", function () {
                     // Enlarge the dot and display the station name and count on mouseover
-                    d3.select(this).attr("r", 10);
-                    g.append("text")
-                        .attr("x", x + 10)
-                        .attr("y", y - 10)
-                        .attr("fill", "black")
-                        .attr("font-size", "12px")
-                        .attr("id", "bike-label")
-                        .text(`${station.Station_Name} - Count: ${count}`); // Show the station name and count
-                })
-                .on("mouseout", function () {
-                    // Reset the dot size and remove the station name and count on mouseout
-                    d3.select(this).attr("r", 3);
-                    g.select("#bike-label").remove(); // Remove the label
-                });
+                    d3.select(this)
+                    .raise()
+                    .attr("r", 10);
+            
+                // Create a group to hold the box and text together
+                const tooltipGroup = g.append("g")
+                    .attr("id", "bike-tooltip");
+            
+                // The text element
+                const text = tooltipGroup.append("text")
+                    .attr("x", x + 10)
+                    .attr("y", y - 10)
+                    .attr("fill", "black")
+                    .attr("font-size", "12px")
+                    .text(`${station.Station_Name} - Count: ${count}`);
+            
+                // After the text is created, we know its size
+                const bbox = text.node().getBBox();
+            
+                // Add a rectangle behind the text
+                tooltipGroup.insert("rect", "text") // insert rect *before* text
+                    .attr("x", bbox.x - 5) // a little padding
+                    .attr("y", bbox.y - 3)
+                    .attr("width", bbox.width + 10)
+                    .attr("height", bbox.height + 6)
+                    .attr("rx", 5) // rounded corners
+                    .attr("ry", 5)
+                    .attr("fill", "white")
+                    .attr("opacity", 0.7)
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 0.5);
+            })
+            .on("mouseout", function () {
+                d3.select(this).attr("r", 3);
+                g.select("#bike-tooltip").remove(); // Remove the group
+            });
         });
 
     }).catch(function (error) {
