@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Set up the Mercator projection for the map with the center at Philadelphia
         const projection = d3.geoMercator()
             .center([-75.1652, 40.0000])  // Center on Philadelphia
-            .scale(100000); // Set an appropriate scale for the map
+            .scale(180000); // Set an appropriate scale for the map
 
         const path = d3.geoPath().projection(projection);
 
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const countValues = stationCounts.map(d => +d.count); // Extract the counts as numbers
         const countColorScale = d3.scaleSequential()
             .domain([d3.min(countValues), d3.max(countValues)]) // Set domain to the min and max counts
-            .range(["lightblue", "darkblue"]); // Use a color range from light to dark green
+            .range(["#e5e8f0", "#002169"]); // Use a color range from light to dark blue (Indego colors)
 
         // Draw the ZIP code boundaries on the map
         g.selectAll("path.zip")
@@ -69,23 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .attr("fill", "gray") // Set the fill color of the ZIP regions
             .attr("stroke", "black") // Set the stroke color
             .attr("stroke-width", 1) // Set the stroke width
-            .on("mouseover", function (event, d) {
-                // Highlight the ZIP region and show the ZIP code on mouseover
-                d3.select(this).attr("fill", "orange");
-                const [x, y] = d3.pointer(event);
-                g.append("text")
-                    .attr("x", x)
-                    .attr("y", y - 10)
-                    .attr("fill", "black")
-                    .attr("font-size", "12px")
-                    .attr("id", "zip-label")
-                    .text(`ZIP: ${d.properties.CODE}`); // Show ZIP code in the label
-            })
-            .on("mouseout", function () {
-                // Reset the ZIP region color and remove the label on mouseout
-                d3.select(this).attr("fill", "gray");
-                g.select("#zip-label").remove(); // Remove the label
-            });
 
         // Add Indigo bike stations as circles with color based on count
         indigoStations.forEach(station => {
