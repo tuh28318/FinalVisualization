@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const width = window.innerWidth;   // Get the window width
         const height = window.innerHeight; // Get the window height
+        const center = [width / 2, height / 2]; // Centers the zoom
 
         // Create an SVG element for the map
         const svg = d3.select("#map")
@@ -26,32 +27,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Create a zoom behavior with the ability to scale the map
         const zoom = d3.zoom()
-            .scaleExtent([1, 20]) // Limit the zoom-in and zoom-out scale range
-            .on("zoom", (event) => {
-                // Apply the zoom to the projection scale and transform the map
-                const transform = event.transform;
-                const newProjection = projection.scale(transform.k * 50000); // Scale the map based on zoom level
-                path.projection(newProjection); // Update path projection
-                g.attr("transform", transform); // Apply the zoom transform to the group
-            });
+        .scaleExtent([1, 20])
+        .on("zoom", (event) => {
+            g.attr("transform", event.transform); // Just transform the group, don't mess with projection
+        });
 
         // Apply zoom behavior to the SVG container
         svg.call(zoom);
 
         // Zoom in button event handler
         document.getElementById("zoom-in").addEventListener("click", () => {
-            svg.transition().call(zoom.scaleBy, 1.2); // Zoom in by a factor of 1.2
+            svg.transition().call(zoom.scaleBy, 1.2, center); // Zoom in by a factor of 1.2
         });
 
         // Zoom out button event handler
         document.getElementById("zoom-out").addEventListener("click", () => {
-            svg.transition().call(zoom.scaleBy, 0.8); // Zoom out by a factor of 0.8
+            svg.transition().call(zoom.scaleBy, 0.8, center); // Zoom out by a factor of 0.8
         });
 
         // Reset zoom button event handler
         document.getElementById("reset-zoom").addEventListener("click", () => {
-            svg.transition().call(zoom.transform, d3.zoomIdentity); // Reset zoom to default scale
+            svg.transition()
+                .duration(750) // 750ms smooth transition
+                .ease(d3.easeCubicOut) // Nice easing function
+                .call(zoom.transform, d3.zoomIdentity); // Reset zoom to default scale
         });
+        
 
         // Create a color scale for the station counts
         const countValues = stationCounts.map(d => +d.count); // Extract the counts as numbers
@@ -126,6 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     }).catch(function (error) {
-        console.error("Error loading data:", error); // Handle any data loading errors
+//        console.error("Error loading data:", error); // Handle any data loading errors
     });
 });
