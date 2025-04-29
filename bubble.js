@@ -3,30 +3,30 @@ const height = 700;
 
 // Append SVG to the chart div
 const svg = d3.select("#bubble-chart")
-              .append("svg")
-              .attr("width", width)
-              .attr("height", height);
+  .append("svg")
+  .attr("width", width)
+  .attr("height", height);
 
 // Create a tooltip
 const tooltip = d3.select("body")
-                  .append("div")
-                  .attr("class", "tooltip");
+  .append("div")
+  .attr("class", "tooltip");
 
 // Load the CSV file
-d3.csv("passholder_type_counts.csv").then(function(data) {
+d3.csv("passholderType.csv").then(function(data) {
 
   // Define your custom colors
   const customColors = ["#0082ca", "#002169","#587f00", "#93d500", "#4c6396"];
 
   // Create the color scale
   const colorScale = d3.scaleOrdinal()
-                       .domain(data.map(d => d.passholder_type))
-                       .range(customColors);
+    .domain(data.map(d => d.passholder_type))
+    .range(customColors);
 
   // Define size scale based on counts
   const sizeScale = d3.scaleSqrt()
-                      .domain([0, d3.max(data, d => +d.count)])
-                      .range([30, 150]);
+    .domain([0, d3.max(data, d => +d.count)])
+    .range([30, 150]);
 
   // Force simulation
   const simulation = d3.forceSimulation(data)
