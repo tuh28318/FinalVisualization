@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     Promise.all([
-        d3.json("PhiladelphiaMap.geojson"),
-        d3.csv("IndegoStations.csv"),
-        d3.csv("start_station_counts_with_names.csv")
+        d3.json("philadelphiaMap.geojson"),
+        d3.csv("indegoStations.csv"),
+        d3.csv("indegoStationCount.csv")
     ]).then(function ([geojson, indigoStations, stationCounts]) {
         
         
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const countValues = stationCounts.map(d => +d.count); // Extract station counts
         const countColorScale = d3.scaleSequential()
             .domain([d3.min(countValues), d3.max(countValues)]) // Set the color scale based on station counts
-            .range(["#e5e8f0", "#002169"]); // Use a color range from light to dark blue
+            .range(["#ffffff", "#001d5e"]); // Use a color range from light to dark blue
 
         // Draw the ZIP code boundaries on the map
         g.selectAll("path.zip")
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .append("path") // Append a new path for each ZIP region
             .attr("class", "zip")
             .attr("d", path) // Set the path data based on the projection
-            .attr("fill", "gray") // Set the fill color of the ZIP regions
+            .attr("fill", "#808080") // Set the fill color of the ZIP regions
             .attr("stroke", "black") // Set the stroke color for boundaries
             .attr("stroke-width", 1); // Set the stroke width
 
