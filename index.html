@@ -3,80 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <title>Philly Map + Bubbles + Electric Ratio</title>
 
   <style>
-    /* Apply box-sizing globally so padding and borders don't cause overflow */
     * {
       box-sizing: border-box;
     }
 
-    /* Main container grid (2/3 for visualizations and 1/3 for text) */
-    #main-container {
-      display: grid;
-      grid-template-columns: 2fr 1fr; /* 2/3 for visualizations and 1/3 for text */
-      width: 100%;
-      min-height: 100vh; /* Full viewport height */
-      overflow: auto; /* Allow scrolling */
-      padding: 10px; /* Reduced padding for the main container */
-      gap: 20px;
-    }
-
-    /* Visualizations container (maps and bubble chart) */
-    #visualizations-container {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      padding: 0; /* Removed extra padding around visualization container */
-      background: #f9f9f9;
-      overflow: hidden; /* Prevent content from spilling out */
-    }
-
-    /* Apply a fixed height for the map if you want to prevent it from taking up the entire viewport */
-    #map {
-      width: 100%;
-      height: calc(100vh); /* Example to make the map take 80% of the viewport height */
-      margin-bottom: 20px; /* Space between map and next element */
-      overflow: hidden; /* Prevent overflow */
-      border: 2px solid #f9f9f9; /* Border around map */
-      border-radius: 8px;
-      padding: 0;
-    }
-
-    /* If you want to apply the same height behavior to bubble-chart and electric-ratio-map */
-    #bubble-chart, #electric-ratio-map {
-      width: 100%;
-      height: calc(100vh); /* Keep full height for other visualizations */
-      margin-bottom: 20px;
-      overflow: hidden;
-      border: 2px solid #f9f9f9;
-      border-radius: 8px;
-      padding: 0;
-    }
-
-    /* New map container */
     #newmap-container {
       width: 100%;
-      height: calc(100vh);
-      margin-bottom: 20px;
+      height: 900px;
+      margin: 40px auto;
+      border: 2px solid #000000;
+      border-radius: 10px;
       overflow: hidden;
-      border: 2px solid #f9f9f9;
-      border-radius: 8px;
-      padding: 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      /*transform: scale(0.9); /* Shrink the container to 80% of its original size */
+      /*transform-origin: center;*/
     }
 
     #newmap {
       width: 100%;
-      height: 600px;
+      height: 100%;
     }
 
-    /* Text section on the right */
-    #text-container {
+    #main-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr; /* 2/3 for visualizations and 1/3 for text */
+      width: 100%;
+      min-height: 100vh;
+      overflow: auto;
+      padding: 20px;
+    }
+
+    #visualizations-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
       padding: 20px;
       background: #f9f9f9;
-      overflow-y: auto; /* Allow scrolling if content overflows */
-      height: 100%; /* Fill container */
-      border-left: 2px solid #f9f9f9; /* Border to separate from visualizations */
+      overflow: hidden;
+    }
+
+    #map, #bubble-chart, #electric-ratio-map {
+      width: 100%;
+      margin-bottom: 20px;
+      overflow: hidden;
+      border: 2px solid #4e4e4e;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    #text-container {
+      padding: 20px;
+      background: #ffffff;
+      overflow-y: auto;
+      height: 100%;
+      border-left: 2px solid #4e4e4e;
     }
 
     h1 {
@@ -91,17 +76,7 @@
       margin: 0;
     }
 
-    .viz-container {
-      width: 100%;
-      margin-bottom: 20px;
-      background: #f9f9f9;
-      padding: 0;
-      border-radius: 8px;
-      border: 2px solid #eee;
-      position: relative; /* So zoom buttons inside can be positioned absolutely */
-    }
-
-    .zoom-controls {
+    #zoom-controls {
       position: absolute;
       top: 20px;
       left: 20px;
@@ -115,72 +90,66 @@
       z-index: 10;
     }
 
-    .zoom-controls button {
+    #zoom-controls button {
       background: white;
       border: none;
       padding: 10px;
-      font-size: 23px;
+      font-size: 18px;
       cursor: pointer;
       width: 50px;
       height: 50px;
       text-align: center;
     }
 
-    .zoom-controls button:hover {
+    #zoom-controls button:hover {
       background: #eee;
     }
 
-    .zoom-controls button:active {
+    #zoom-controls button:active {
       background: #ddd;
     }
   </style>
 </head>
 <body>
-
   <div id="main-container">
     <!-- Visualizations container -->
     <div id="visualizations-container">
-      
-      <!-- Map Container -->
-      <div class="viz-container map-container" id="map">
-        <div class="zoom-controls" id="zoom-controls-map">
-          <button class="zoom-in">+</button>
-          <button class="zoom-out">-</button>
-          <button class="reset-zoom">⟳</button>
+      <!-- Philadelphia ZIP Code Boundaries Map -->
+      <div id="map">
+        <h1>Philadelphia ZIP Code Boundaries</h1>
+        <div id="zoom-controls-map">
+          <button id="zoom-in">+</button>
+          <button id="zoom-out">-</button>
+          <button id="reset-zoom">⟳</button>
         </div>
       </div>
 
-      <!-- Bubble Chart Container -->
-      <div class="viz-container" id="bubble-chart-container">
-        <div id="bubble-chart">
-          <!-- (bubble chart here) -->
-        </div>
-      </div>
+      <!-- Bubble chart container -->
+      <div id="bubble-chart"></div>
 
-      <!-- Electric Ratio Map Container -->
-      <div class="viz-container" id="electric-ratio-map-container">
-        <div id="electric-ratio-map"></div>
-        <div class="zoom-controls" id="zoom-controls-electric">
-          <button class="zoom-in">+</button>
-          <button class="zoom-out">-</button>
-          <button class="reset-zoom">⟳</button>
+      <!-- Electric ratio map container -->
+      <div id="electric-ratio-map">
+        <h1>Electric Ratio Map</h1>
+        <div id="zoom-controls-electric">
+          <button id="zoom-in-electric">+</button>
+          <button id="zoom-out-electric">-</button>
+          <button id="reset-zoom-electric">⟳</button>
         </div>
       </div>
 
       <!-- New Station Map Container -->
-      <div class="viz-container" id="newmap-container">
+      <div id="newmap-container">
         <div id="newmap"></div>
       </div>
-
     </div>
 
-    <!-- Text section -->
+    <!-- Text section on the right -->
     <div id="text-container">
       <h2>Additional Information</h2>
-      <p>Here you can add any additional details, explanations, or analysis of the data and visualizations presented.</p>
+      <p>Here you can add any additional details, explanations, or analysis of the data and visualizations presented on the left side.</p>
     </div>
   </div>
-  
+
   <!-- Load D3.js -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
