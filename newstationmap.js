@@ -12,7 +12,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 }).addTo(map);
 
 // Load the GeoJSON station data
-fetch('data/stations.geojson')
+fetch("/data/stations.geojson")
     .then(response => response.json())
     .then(data => {
         L.geoJSON(data, {
@@ -48,4 +48,7 @@ fetch('data/stations.geojson')
             }
         }).addTo(map);
     })
-    .catch(error => console.error('Error loading GeoJSON:', error));
+    .catch(error => {
+        console.error('Error loading GeoJSON:', error);
+        alert("There was an issue loading the GeoJSON data.");
+    });
