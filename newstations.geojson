@@ -1,0 +1,34 @@
+
+
+
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3328,
+          "Station_Name": " PROPOSED Schuykill River Trail",
+          "Go_live_date": "3/30/2023",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.19154, 39.97490]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3328,
+          "Station_Name": " PROPOSED DEL River Trail",
+          "Go_live_date": "3/30/2023",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.14315, 39.93324]
+        }
+      }
+    ]
+}
