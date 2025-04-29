@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     Promise.all([
-        d3.json("PhiladelphiaMap.geojson"), // GeoJSON for ZIP boundaries
-        d3.csv("IndegoStations.csv"),      // CSV for Indego stations
-        d3.csv("sorted_with_lat_lon.csv")  // CSV with electric and standard counts and lat/lon
+        d3.json("philadelphiaMap.geojson"), // GeoJSON for ZIP boundaries
+        d3.csv("indegoStations.csv"),      // CSV for Indego stations
+        d3.csv("indegoStationLatLong.csv")  // CSV with electric and standard counts and lat/lon
     ]).then(function ([geojson, indigoStations, stationData]) {
         const container = document.getElementById('map');
         const width = container.clientWidth;
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
             g.append("circle")
                 .attr("cx", x)
                 .attr("cy", y)
-                .attr("r", 5) // Set the radius
+                .attr("r", 3) // Set the radius
                 .attr("fill", electricCount > standardCount ? "#93d500" : "#002169") // Color based on bike type
                 .on("mouseover", function () {
                     d3.select(this)
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         .attr("stroke-width", 0.5);
                 })
                 .on("mouseout", function () {
-                    d3.select(this).attr("r", 5);
+                    d3.select(this).attr("r", 3);
                     g.select("#bike-tooltip").remove(); // Remove the group
                 });
         });
