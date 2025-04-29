@@ -32,28 +32,43 @@
       overflow: hidden; /* Prevent content from spilling out */
     }
 
-/* Apply a fixed height for the map if you want to prevent it from taking up the entire viewport */
-#map {
-  width: 100%;
-  height: calc(100vh); /* Example to make the map take 80% of the viewport height */
-  margin-bottom: 20px; /* Space between map and next element */
-  overflow: hidden; /* Prevent overflow (you can adjust this depending on your needs) */
-  border: 2px solid #f9f9f9; /* Border around map */
-  border-radius: 8px;
-  padding: 0; /* Removed extra padding to avoid cutting off the map */
-}
+    /* Apply a fixed height for the map if you want to prevent it from taking up the entire viewport */
+    #map {
+      width: 100%;
+      height: calc(100vh); /* Example to make the map take 80% of the viewport height */
+      margin-bottom: 20px; /* Space between map and next element */
+      overflow: hidden; /* Prevent overflow */
+      border: 2px solid #f9f9f9; /* Border around map */
+      border-radius: 8px;
+      padding: 0;
+    }
 
-/* If you want to apply the same height behavior to bubble-chart and electric-ratio-map */
-#bubble-chart, #electric-ratio-map {
-  width: 100%;
-  height: calc(100vh); /* Keep full height for other visualizations */
-  margin-bottom: 20px;
-  overflow: hidden;
-  border: 2px solid #f9f9f9;
-  border-radius: 8px;
-  padding: 0;
-}
+    /* If you want to apply the same height behavior to bubble-chart and electric-ratio-map */
+    #bubble-chart, #electric-ratio-map {
+      width: 100%;
+      height: calc(100vh); /* Keep full height for other visualizations */
+      margin-bottom: 20px;
+      overflow: hidden;
+      border: 2px solid #f9f9f9;
+      border-radius: 8px;
+      padding: 0;
+    }
 
+    /* New map container */
+    #newmap-container {
+      width: 100%;
+      height: calc(100vh);
+      margin-bottom: 20px;
+      overflow: hidden;
+      border: 2px solid #f9f9f9;
+      border-radius: 8px;
+      padding: 0;
+    }
+
+    #newmap {
+      width: 100%;
+      height: 600px;
+    }
 
     /* Text section on the right */
     #text-container {
@@ -80,7 +95,7 @@
       width: 100%;
       margin-bottom: 20px;
       background: #f9f9f9;
-      padding: 0; /* Removed extra padding */
+      padding: 0;
       border-radius: 8px;
       border: 2px solid #eee;
       position: relative; /* So zoom buttons inside can be positioned absolutely */
@@ -104,7 +119,7 @@
       background: white;
       border: none;
       padding: 10px;
-      font-size: 18px;
+      font-size: 23px;
       cursor: pointer;
       width: 50px;
       height: 50px;
@@ -127,35 +142,38 @@
     <div id="visualizations-container">
       
       <!-- Map Container -->
-      <!-- Map Container -->
-<div class="viz-container map-container" id="map">
-  <div class="zoom-controls" id="zoom-controls-map">
-    <button class="zoom-in">+</button>
-    <button class="zoom-out">-</button>
-    <button class="reset-zoom">⟳</button>
-  </div>
-</div>
+      <div class="viz-container map-container" id="map">
+        <div class="zoom-controls" id="zoom-controls-map">
+          <button class="zoom-in">+</button>
+          <button class="zoom-out">-</button>
+          <button class="reset-zoom">⟳</button>
+        </div>
+      </div>
 
-  
       <!-- Bubble Chart Container -->
       <div class="viz-container" id="bubble-chart-container">
         <div id="bubble-chart">
           <!-- (bubble chart here) -->
         </div>
       </div>
-  
+
       <!-- Electric Ratio Map Container -->
       <div class="viz-container" id="electric-ratio-map-container">
         <div id="electric-ratio-map"></div>
-        <!-- Zoom buttons for the electric ratio map -->
         <div class="zoom-controls" id="zoom-controls-electric">
           <button class="zoom-in">+</button>
           <button class="zoom-out">-</button>
           <button class="reset-zoom">⟳</button>
         </div>
       </div>
+
+      <!-- New Station Map Container -->
+      <div class="viz-container" id="newmap-container">
+        <div id="newmap"></div>
+      </div>
+
     </div>
-  
+
     <!-- Text section -->
     <div id="text-container">
       <h2>Additional Information</h2>
@@ -165,6 +183,7 @@
   
   <!-- Load D3.js -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <!-- Main Map Script -->
   <script src="script.js"></script>
@@ -174,6 +193,9 @@
 
   <!-- Electric Ratio Map Script -->
   <script src="electric.js"></script>
+
+  <!-- New Station Map Script -->
+  <script src="newstationmap.js"></script>
 
 </body>
 </html>
