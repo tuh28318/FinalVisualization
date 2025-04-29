@@ -1,0 +1,266 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3328,
+          "Station_Name": "Kelly Drive Grandstand",
+          "Go_live_date": "3/30/2023",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.1995, 39.98798]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3323,
+          "Station_Name": "Manayunk Bridge",
+          "Go_live_date": "4/11/2023",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.2266188, 40.025427]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3335,
+          "Station_Name": "Main & Shurs",
+          "Go_live_date": "6/1/2023",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.2179922, 40.0223414]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3329,
+          "Station_Name": "Cresson & Levering",
+          "Go_live_date": "4/27/2023",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.2246069, 40.0265716]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3370,
+          "Station_Name": "Pencoyd Bridge",
+          "Go_live_date": "1/5/2024",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.2139046, 40.0166353]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3291,
+          "Station_Name": "Ridge & Heritage",
+          "Go_live_date": "11/3/2022",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.1966898, 40.0100801]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3369,
+          "Station_Name": "Ridge & Ferry",
+          "Go_live_date": "1/4/2024",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.19194, 40.00772]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3324,
+          "Station_Name": "Kelly Drive - Strawberry Mansion Bridge",
+          "Go_live_date": "3/29/2023",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.19242, 39.99484]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3212,
+          "Station_Name": "Schuylkill Banks Pergola",
+          "Go_live_date": "10/9/2020",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.181591, 39.9636713]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3057,
+          "Station_Name": "Philadelphia Museum of Art",
+          "Go_live_date": "4/23/2015",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.1815121, 39.9655639]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3165,
+          "Station_Name": "24th & Race SRT",
+          "Go_live_date": "9/27/2017",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.1780878, 39.9581833]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3161,
+          "Station_Name": "30th Street Station East",
+          "Go_live_date": "6/6/2017",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.1808956, 39.9548888]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3061,
+          "Station_Name": "23rd & Market",
+          "Go_live_date": "4/23/2015",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.17756, 39.9542617]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3062,
+          "Station_Name": "24th & Sansom",
+          "Go_live_date": "4/23/2015",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.1794573, 39.9519156]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3163,
+          "Station_Name": "25th & Locust",
+          "Go_live_date": "6/9/2017",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.1810572, 39.9496367]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3162,
+          "Station_Name": "27th & South",
+          "Go_live_date": "6/9/2017",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.18490198, 39.94620737]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3319,
+          "Station_Name": "Penn Treaty Park",
+          "Go_live_date": "4/4/2023",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.1286832, 39.9661902]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3124,
+          "Station_Name": "Race Street Pier",
+          "Go_live_date": "3/31/2016",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.1386646, 39.9530994]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3049,
+          "Station_Name": "Foglietta Plaza",
+          "Go_live_date": "4/23/2015",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.1425, 39.94509]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_ID": 3110,
+          "Station_Name": "Del. River Trail & Penn St.",
+          "Go_live_date": "5/4/2016",
+          "Status": "Active"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.13641, 39.96175]
+        }
+      }
+    ]
+  }
+  
