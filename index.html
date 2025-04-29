@@ -5,78 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-  <title> Final Visualization Project</title>
+  <title>Final Visualization Project</title>
 
   <style>
     * {
       box-sizing: border-box;
     }
 
-    #newmap-container {
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      background-color: #eaeaea;
+    }
+
+    #main-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px; /* Reduced the gap between groups */
+      padding: 20px;
       width: 100%;
-      height: 900px;
-      margin: 40px auto;
-      border: 2px solid #000000;
-      border-radius: 10px;
+    }
+
+    .visualization-group {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+      align-items: flex-start;
+      transform: scale(0.7); /* Scale down to 70% */
+      transform-origin: center; /* Keep the center as the reference point */
+    }
+
+    .visualization {
+      flex: 2;
+      border: 2px solid #ffffff;
+      border-radius: 20px;
+      padding: 10px;
+      background: #ffffff;
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      /*transform: scale(0.9); /* Shrink the container to 80% of its original size */
-      /*transform-origin: center;*/
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .text-container {
+      flex: 1;
+      background: #f9f9f9;
+      padding: 20px;
+      height: 100%;
+      border: 2px solid #ffffff;
+      border-radius: 20px;
+      background: #ffffff;
     }
 
     #newmap {
       width: 100%;
-      height: 100%;
+      height: 900px;
     }
 
-    #main-container {
-      display: grid;
-      grid-template-columns: 2fr 1fr; /* 2/3 for visualizations and 1/3 for text */
-      width: 100%;
-      min-height: 100vh;
-      overflow: auto;
-      padding: 20px;
+    #bubble-chart {
+      height: 600px;
     }
 
-    #visualizations-container {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      padding: 20px;
-      background: #f9f9f9;
-      overflow: hidden;
+    #electric-ratio-map,
+    #map {
+      height: 900px;
     }
 
-    #map, #bubble-chart, #electric-ratio-map {
-      width: 100%;
-      margin-bottom: 20px;
-      overflow: hidden;
-      border: 2px solid #4e4e4e;
-      border-radius: 8px;
-      padding: 10px;
-    }
-
-    #text-container {
-      padding: 20px;
-      background: #f9f9f9;
-      overflow-y: auto;
-      height: 100%;
-      border-left: 2px solid #f9f9f9;
-    }
-
-    h1 {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 20px;
-      z-index: 10;
-      margin: 0;
-    }
-
-    #zoom-controls {
+    #zoom-controls-map,
+    #zoom-controls-electric {
       position: absolute;
       top: 20px;
       left: 20px;
@@ -90,7 +89,8 @@
       z-index: 10;
     }
 
-    #zoom-controls button {
+    #zoom-controls-map button,
+    #zoom-controls-electric button {
       background: white;
       border: none;
       padding: 10px;
@@ -101,67 +101,81 @@
       text-align: center;
     }
 
-    #zoom-controls button:hover {
+    #zoom-controls-map button:hover,
+    #zoom-controls-electric button:hover {
       background: #eee;
     }
 
-    #zoom-controls button:active {
+    #zoom-controls-map button:active,
+    #zoom-controls-electric button:active {
       background: #ddd;
     }
   </style>
 </head>
 <body>
+
   <div id="main-container">
-    <!-- Visualizations container -->
-    <div id="visualizations-container">
-      <!-- Philadelphia ZIP Code Boundaries Map -->
-      <div id="map">
+
+    <!-- Group 1: ZIP Code Map -->
+    <div class="visualization-group">
+      <div class="visualization" id="map">
         <div id="zoom-controls-map">
           <button id="zoom-in">+</button>
           <button id="zoom-out">-</button>
           <button id="reset-zoom">⟳</button>
         </div>
       </div>
+      <div class="text-container">
+        <h2>ZIP Code Map</h2>
+        <p>This map displays the boundaries of Philadelphia ZIP codes, helping to understand regional distributions and patterns in your data.</p>
+      </div>
+    </div>
 
-      <!-- Bubble chart container -->
-      <div id="bubble-chart"></div>
+    <!-- Group 2: Bubble Chart -->
+    <div class="visualization-group">
+      <div class="visualization" id="bubble-chart"></div>
+      <div class="text-container">
+        <h2>Bubble Chart</h2>
+        <p>This chart visualizes station usage or counts by size and color of bubbles, revealing areas of high and low activity.</p>
+      </div>
+    </div>
 
-      <!-- Electric ratio map container -->
-      <div id="electric-ratio-map">
+    <!-- Group 3: Electric Ratio Map -->
+    <div class="visualization-group">
+      <div class="visualization" id="electric-ratio-map">
         <div id="zoom-controls-electric">
           <button id="zoom-in-electric">+</button>
           <button id="zoom-out-electric">-</button>
           <button id="reset-zoom-electric">⟳</button>
         </div>
       </div>
-
-      <!-- New Station Map Container -->
-      <div id="newmap-container">
-        <div id="newmap"></div>
+      <div class="text-container">
+        <h2>Electric to Standard Ratio</h2>
+        <p>This map displays the ratio of electric to standard bikes across different areas, helping identify electrification trends.</p>
       </div>
     </div>
 
-    <!-- Text section on the right -->
-    <div id="text-container">
-      <h2>Additional Information</h2>
-      <p>Here you can add any additional details, explanations, or analysis of the data and visualizations presented on the left side.</p>
+    <!-- Group 4: New Station Map -->
+    <div class="visualization-group">
+      <div class="visualization" id="newmap-container">
+        <div id="newmap"></div>
+      </div>
+      <div class="text-container">
+        <h2>New Stations</h2>
+        <p>This visualization highlights newly proposed or activated stations, showing coverage expansion or service updates.</p>
+      </div>
     </div>
+
   </div>
 
-  <!-- Load D3.js -->
+  <!-- Load Libraries -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- Main Map Script -->
+  <!-- Scripts -->
   <script src="script.js"></script>
-
-  <!-- Bubble Chart Script -->
   <script src="bubble.js"></script>
-
-  <!-- Electric Ratio Map Script -->
   <script src="electric.js"></script>
-
-  <!-- New Station Map Script -->
   <script src="newstationmap.js"></script>
 
 </body>
