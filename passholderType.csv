@@ -1,6 +1,5 @@
-passholder_type,count
-Indego30,725705
-Indego365,451932
-Day Pass,60016
-Walk-up,38386
-IndegoFlex,4
+passholder_type,count,electriccount,standardcount
+Indego30,725705,419397,306308
+Indego365,451932,274252,177680
+Day Pass,60016,37781,22235
+Walk-up,38386,26079,12307

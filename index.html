@@ -157,6 +157,17 @@
       font-size: 16px;
       margin-top: 4px;
     }
+    .tooltip {
+  position: absolute;
+  background: #ffffff;
+  padding: 8px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  font-size: 14px;
+  pointer-events: none;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
   </style>
 </head>
 <body>
@@ -195,7 +206,17 @@
       <div class="visualization" id="bubble-chart"></div>
       <div class="text-container">
         <h2>Passholder Types</h2>
-        <p>Current percentage of each passholder type.</p>
+        <p>Current percentage of electric vs. standard bike usage within
+          each passholder type.
+          <br><br>
+        <span class="legend-item">
+          <span class="legend-circle green"></span> electric bikes
+        </span>
+        <br>
+        <span class="legend-item">
+          <span class="legend-circle darkblue"></span> standard bikes
+        </span>
+        </p>
       </div>
     </div>
 
