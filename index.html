@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
-  <title>Final Visualization Project</title>
+  <title>Indego Bike Share</title>
 
   <style>
     * {
@@ -19,11 +18,20 @@
       background-color: #eaeaea;
     }
 
+    h1.page-title {
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      background-color: #ffffff;
+      font-size: 32px;
+      border-bottom: 2px solid #ccc;
+    }
+
     #main-container {
       display: flex;
       flex-direction: column;
-      gap: 10px; /* Reduced the gap between groups */
-      padding: 20px;
+      gap: 10px;
+      padding: 0 20px 20px 20px;
       width: 100%;
     }
 
@@ -32,8 +40,8 @@
       gap: 20px;
       width: 100%;
       align-items: flex-start;
-      transform: scale(0.7); /* Scale down to 70% */
-      transform-origin: center; /* Keep the center as the reference point */
+      transform: scale(0.7);
+      transform-origin: center;
     }
 
     .visualization {
@@ -52,12 +60,10 @@
 
     .text-container {
       flex: 1;
-      background: #f9f9f9;
+      background: #ffffff;
       padding: 20px;
-      height: 100%;
       border: 2px solid #ffffff;
       border-radius: 20px;
-      background: #ffffff;
     }
 
     #newmap {
@@ -110,9 +116,55 @@
     #zoom-controls-electric button:active {
       background: #ddd;
     }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    .legend-circle {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+      
+    }
+
+    .legend-circle.darkblue {
+      background-color: #002169;
+    }
+
+    .legend-circle.green {
+    
+      background-color: #93d500;
+    }
+
+    .gradient-legend {
+      height: 20px;
+      width: 100%;
+      border: 1px solid #000;
+      border-radius: 5px;
+      background: linear-gradient(to right, #002169, #e5e8f0);
+      margin-top: 10px;
+    }
+
+    .legend-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      margin-top: 4px;
+    }
   </style>
 </head>
 <body>
+  <h1 style="text-align: center; font-size: 36px; margin-top: 40px; margin-bottom: 0;">
+    Indego Bike Share
+  </h1>
+  
+
 
   <div id="main-container">
 
@@ -126,8 +178,15 @@
         </div>
       </div>
       <div class="text-container">
-        <h2>ZIP Code Map</h2>
-        <p>This map displays the boundaries of Philadelphia ZIP codes, helping to understand regional distributions and patterns in your data.</p>
+        <h2>Active Bike Map</h2>
+        <p>Current active bike stations with the number of 
+          trips started from each station within the past year.
+        </p>
+        <div class="gradient-legend"></div>
+        <div class="legend-labels">
+          <span>high count</span>
+          <span>low count</span>
+        </div>
       </div>
     </div>
 
@@ -135,25 +194,35 @@
     <div class="visualization-group">
       <div class="visualization" id="bubble-chart"></div>
       <div class="text-container">
-        <h2>Bubble Chart</h2>
-        <p>This chart visualizes station usage or counts by size and color of bubbles, revealing areas of high and low activity.</p>
+        <h2>Passholder Types</h2>
+        <p>Current percentage of each passholder type.</p>
       </div>
     </div>
 
-    <!-- Group 3: Electric Ratio Map -->
-    <div class="visualization-group">
-      <div class="visualization" id="electric-ratio-map">
-        <div id="zoom-controls-electric">
-          <button id="zoom-in-electric">+</button>
-          <button id="zoom-out-electric">-</button>
-          <button id="reset-zoom-electric">⟳</button>
-        </div>
-      </div>
-      <div class="text-container">
-        <h2>Electric to Standard Ratio</h2>
-        <p>This map displays the ratio of electric to standard bikes across different areas, helping identify electrification trends.</p>
+   <!-- Group 3: Electric Ratio Map -->
+   <div class="visualization-group">
+    <div class="visualization" id="electric-ratio-map">
+      <div id="zoom-controls-electric">
+        <button id="zoom-in-electric">+</button>
+        <button id="zoom-out-electric">-</button>
+        <button id="reset-zoom-electric">⟳</button>
       </div>
     </div>
+    <div class="text-container">
+      <h2>Electric to Standard Ratio</h2>
+      <p>Map of Indego bike stations focusing on electric vs. standard bike usage 
+        over the past year.
+        <br><br>
+        <span class="legend-item">
+          <span class="legend-circle green"></span> Higher ratio of electric bikes
+        </span>
+        <br>
+        <span class="legend-item">
+          <span class="legend-circle darkblue"></span> Higher ratio of standard
+        </span></p>
+    </div>
+  </div>
+
 
     <!-- Group 4: New Station Map -->
     <div class="visualization-group">
@@ -162,7 +231,17 @@
       </div>
       <div class="text-container">
         <h2>New Stations</h2>
-        <p>This visualization highlights newly proposed or activated stations, showing coverage expansion or service updates.</p>
+        <p>Map of active Indego bike stations along 
+          popular bike routes (Schuyklill River Trail and 
+          Delaware River Trail) and proposed bike stations.
+          <br><br>
+        <span class="legend-item">
+          <span class="legend-circle darkblue"></span> Current active stations
+        </span>
+        <br>
+        <span class="legend-item">
+          <span class="legend-circle green"></span> Proposed stations
+        </span></p>
       </div>
     </div>
 
