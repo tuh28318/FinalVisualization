@@ -7,10 +7,9 @@
       {
         "type": "Feature",
         "properties": {
-          "Station_ID": 3328,
-          "Station_Name": " PROPOSED Schuykill River Trail",
-          "Go_live_date": "3/30/2023",
-          "Status": "Active"
+    
+          "Station_Name": " PROPOSED: Schuykill River Trail"
+          
         },
         "geometry": {
           "type": "Point",
@@ -20,14 +19,23 @@
       {
         "type": "Feature",
         "properties": {
-          "Station_ID": 3328,
-          "Station_Name": " PROPOSED DEL River Trail",
-          "Go_live_date": "3/30/2023",
-          "Status": "Active"
+          "Station_Name": " PROPOSED: Delaware River Trail"
+          
         },
         "geometry": {
           "type": "Point",
           "coordinates": [-75.14315, 39.93324]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Station_Name": " PROPOSED: Columbus Crossing"
+          
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-75.14049, 39.92619]
         }
       }
     ]
