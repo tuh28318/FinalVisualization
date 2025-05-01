@@ -12,8 +12,8 @@ const tooltip = d3.select("body")
   .append("div")
   .attr("class", "tooltip");
 
-// Load data
-d3.csv("passholderType.csv").then(function (data) {
+// Load the file
+d3.csv("passholderType.csv").then(function(data) {
 
   // Bubble size based on total count
   const sizeScale = d3.scaleSqrt()
@@ -28,19 +28,19 @@ d3.csv("passholderType.csv").then(function (data) {
   const arc = d3.arc();
 
   // Color scale for electric vs standard bikes
-  const color = d3.scaleOrdinal()
+  const sliceColor = d3.scaleOrdinal()
     .domain(["electric", "standard"])
     .range(["#93d500", "#002169"]);
 
   // Create groups for each pie bubble
-  const groups = svg.selectAll(".pieGroup")
+  const pieGroups = svg.selectAll(".pieGroup")
     .data(data)
     .enter()
     .append("g")
     .attr("class", "pieGroup");
 
   // Create pie slices in each group
-  groups.each(function (d) {
+  pieGroups.each(function(d) {
     const radius = sizeScale(+d.count);
 
     const pieData = pie([
@@ -48,50 +48,55 @@ d3.csv("passholderType.csv").then(function (data) {
       { key: "standard", value: +d.standardcount }
     ]);
 
-    const pieArc = arc.innerRadius(0).outerRadius(radius);
+    const localArc = arc.innerRadius(0).outerRadius(radius);
 
     d3.select(this)
       .selectAll("path")
       .data(pieData)
       .enter()
       .append("path")
-      .attr("d", pieArc)
-      .attr("fill", slice => color(slice.data.key))
+      .attr("d", localArc)
+      .attr("fill", d => sliceColor(d.data.key))
       .attr("stroke", "#333")
       .attr("stroke-width", 1)
-      .on("mouseover", function (event, slice) {
+      .on("mouseover", function(event, slice) {
         const total = +d.count;
-        const percent = ((slice.data.value / total) * 100).toFixed(1) + "%";
-        const label = slice.data.key.charAt(0).toUpperCase() + slice.data.key.slice(1);
+        const sliceValue = slice.data.value;
+        const sliceKey = slice.data.key;
+        const percent = ((sliceValue / total) * 100).toFixed(1) + "%";
 
         tooltip
           .style("visibility", "visible")
-          .html(`${label} Bike: ${percent}`)
+          .html(`
+            
+            ${sliceKey.charAt(0).toUpperCase() + sliceKey.slice(1)} Bike: ${percent}
+          `)
           .style("top", (event.pageY + 10) + "px")
           .style("left", (event.pageX + 10) + "px");
       })
-      .on("mousemove", function (event) {
+      .on("mousemove", function(event) {
         tooltip
           .style("top", (event.pageY + 10) + "px")
           .style("left", (event.pageX + 10) + "px");
       })
-      .on("mouseout", function () {
+      .on("mouseout", function() {
         tooltip.style("visibility", "hidden");
       });
   });
 
   // Passholder type labels inside bubbles
-  groups.append("text")
+  const labels = pieGroups
+    .append("text")
     .attr("text-anchor", "middle")
     .attr("dy", ".35em")
     .text(d => d.passholder_type)
     .style("pointer-events", "none")
     .style("fill", "white")
-    .style("font-size", function (d) {
+    .style("font-size", function(d) {
       const radius = sizeScale(+d.count);
-      const estimatedWidth = d.passholder_type.length * 7;
-      const scale = radius / (estimatedWidth * 1.2);
-      return Math.min(2 * radius, Math.max(8, scale * 16)) + "px";
+      const estimatedTextWidth = d.passholder_type.length * 7;
+      const scaleFactor = radius / (estimatedTextWidth * 1.2);
+      return Math.min(2 * radius, Math.max(8, scaleFactor * 16)) + "px";
     });
 
   // Spread out bubbles
@@ -102,6 +107,6 @@ d3.csv("passholderType.csv").then(function (data) {
     .on("tick", ticked);
 
   function ticked() {
-    groups.attr("transform", d => `translate(${d.x},${d.y})`);
+    pieGroups.attr("transform", d => `translate(${d.x},${d.y})`);
   }
 });

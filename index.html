@@ -15,95 +15,106 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      font-size: 20px;
-      background-color: #f0f0f0;
+      font-size: 24px;
+      background-color: #eaeaea;
     }
 
     h1.page-title {
       margin: 0;
-      padding: 30px 20px;
+      padding: 20px;
       text-align: center;
-      background-color: #fff;
-      font-size: 36px;
+      background-color: #ffffff;
+      font-size: 32px;
       border-bottom: 2px solid #ccc;
     }
 
     #main-container {
       display: flex;
       flex-direction: column;
-      gap: 30px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: auto;
+      gap: 10px;
+      padding: 0 20px 20px 20px;
+      width: 100%;
     }
 
     .visualization-group {
       display: flex;
       gap: 20px;
+      width: 100%;
       align-items: flex-start;
-      transform: scale(0.95);
+      transform: scale(0.7);
       transform-origin: center;
     }
 
     .visualization {
       flex: 2;
-      position: relative;
-      background: #fff;
-      border: 2px solid #ddd;
-      border-radius: 16px;
+      border: 2px solid #ffffff;
+      border-radius: 20px;
       padding: 10px;
+      background: #ffffff;
+      position: relative;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      text-align: center;
     }
 
     .text-container {
       flex: 1;
-      background: #fff;
+      background: #ffffff;
       padding: 20px;
-      border: 2px solid #ddd;
-      border-radius: 16px;
+      border: 2px solid #ffffff;
+      border-radius: 20px;
     }
 
-    #map, #electric-ratio-map, #newmap {
+    #newmap {
       width: 100%;
       height: 900px;
     }
 
     #bubble-chart {
-      width: 100%;
       height: 600px;
     }
 
-    .zoom-controls {
+    #electric-ratio-map,
+    #map {
+      height: 900px;
+    }
+
+    #zoom-controls-map,
+    #zoom-controls-electric {
       position: absolute;
       top: 20px;
       left: 20px;
       display: flex;
       flex-direction: column;
-      background: #fff;
+      background: white;
       border: 1px solid #ccc;
       border-radius: 8px;
-      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
       z-index: 10;
     }
 
-    .zoom-controls button {
+    #zoom-controls-map button,
+    #zoom-controls-electric button {
+      background: white;
       border: none;
-      background: #fff;
       padding: 10px;
       font-size: 20px;
       cursor: pointer;
       width: 50px;
       height: 50px;
+      text-align: center;
     }
 
-    .zoom-controls button:hover {
+    #zoom-controls-map button:hover,
+    #zoom-controls-electric button:hover {
       background: #eee;
     }
 
-    .zoom-controls button:active {
+    #zoom-controls-map button:active,
+    #zoom-controls-electric button:active {
       background: #ddd;
     }
 
@@ -111,7 +122,7 @@
       display: flex;
       align-items: center;
       margin-top: 10px;
-      font-size: 16px;
+      font-size: 18px;
     }
 
     .legend-circle {
@@ -120,6 +131,7 @@
       border-radius: 50%;
       display: inline-block;
       margin-right: 8px;
+      
     }
 
     .legend-circle.darkblue {
@@ -127,6 +139,7 @@
     }
 
     .legend-circle.green {
+    
       background-color: #93d500;
     }
 
@@ -142,13 +155,13 @@
     .legend-labels {
       display: flex;
       justify-content: space-between;
-      font-size: 14px;
+      font-size: 16px;
       margin-top: 4px;
     }
 
     .tooltip {
       position: absolute;
-      background: #fff;
+      background: #ffffff;
       padding: 8px;
       border: 1px solid #333;
       border-radius: 4px;
@@ -158,28 +171,35 @@
     }
   </style>
 
+
 </head>
 <body>
-  <h1 class="page-title">Indego Bike Share</h1>
+  <h1 style="text-align: center; font-size: 36px; margin-top: 40px; margin-bottom: 0;">
+    Indego Bike Share
+  </h1>
+  
+
 
   <div id="main-container">
 
     <!-- Map 1 -->
     <div class="visualization-group">
       <div class="visualization" id="map">
-        <div class="zoom-controls" id="zoom-controls-map">
+        <div id="zoom-controls-map">
           <button id="zoom-in">+</button>
           <button id="zoom-out">-</button>
           <button id="reset-zoom">⟳</button>
         </div>
       </div>
       <div class="text-container">
-        <h2>Active Bike Stations</h2>
-        <p>Shows all currently active bike stations with trip counts from the past year.</p>
+        <h2>Active Bike Map</h2>
+        <p>Current active bike stations with the number of 
+          trips started from each station within the past year.
+        </p>
         <div class="gradient-legend"></div>
         <div class="legend-labels">
-          <span>High</span>
-          <span>Low</span>
+          <span>high count</span>
+          <span>low count</span>
         </div>
       </div>
     </div>
@@ -188,37 +208,45 @@
     <div class="visualization-group">
       <div class="visualization" id="bubble-chart"></div>
       <div class="text-container">
-        <h2>Bike Usage by Passholder Type</h2>
-        <p>Displays electric vs. standard bike usage across different passholder groups.</p>
-        <div class="legend-item">
-          <span class="legend-circle green"></span> Electric Bikes
-        </div>
-        <div class="legend-item">
-          <span class="legend-circle darkblue"></span> Standard Bikes
-        </div>
+        <h2>Passholder Types</h2>
+        <p>Current percentage of electric vs. standard bike usage within
+          each passholder type.
+          <br><br>
+        <span class="legend-item">
+          <span class="legend-circle green"></span> electric bikes
+        </span>
+        <br>
+        <span class="legend-item">
+          <span class="legend-circle darkblue"></span> standard bikes
+        </span>
+        </p>
       </div>
     </div>
 
-    <!-- Map 2 -->
-    <div class="visualization-group">
-      <div class="visualization" id="electric-ratio-map">
-        <div class="zoom-controls" id="zoom-controls-electric">
-          <button id="zoom-in-electric">+</button>
-          <button id="zoom-out-electric">-</button>
-          <button id="reset-zoom-electric">⟳</button>
-        </div>
-      </div>
-      <div class="text-container">
-        <h2>Electric vs. Standard Usage</h2>
-        <p>Compares electric and standard bike usage by station over the past year.</p>
-        <div class="legend-item">
-          <span class="legend-circle green"></span> More Electric
-        </div>
-        <div class="legend-item">
-          <span class="legend-circle darkblue"></span> More Standard
-        </div>
+   <!-- Map 2 -->
+   <div class="visualization-group">
+    <div class="visualization" id="electric-ratio-map">
+      <div id="zoom-controls-electric">
+        <button id="zoom-in-electric">+</button>
+        <button id="zoom-out-electric">-</button>
+        <button id="reset-zoom-electric">⟳</button>
       </div>
     </div>
+    <div class="text-container">
+      <h2>Electric to Standard Ratio</h2>
+      <p>Map of Indego bike stations focusing on electric vs. standard bike usage 
+        over the past year.
+        <br><br>
+        <span class="legend-item">
+          <span class="legend-circle green"></span> Higher ratio of electric bikes
+        </span>
+        <br>
+        <span class="legend-item">
+          <span class="legend-circle darkblue"></span> Higher ratio of standard
+        </span></p>
+    </div>
+  </div>
+
 
     <!-- Leaflet Map -->
     <div class="visualization-group">
@@ -226,14 +254,18 @@
         <div id="newmap"></div>
       </div>
       <div class="text-container">
-        <h2>New & Proposed Stations</h2>
-        <p>Highlights existing and proposed Indego stations near major bike trails like the Schuylkill River Trail and Delaware River Trail.</p>
-        <div class="legend-item">
-          <span class="legend-circle darkblue"></span> Current Stations
-        </div>
-        <div class="legend-item">
-          <span class="legend-circle green"></span> Proposed Stations
-        </div>
+        <h2>New Stations</h2>
+        <p>Map of active Indego bike stations along 
+          popular bike routes (Schuyklill River Trail and 
+          Delaware River Trail) and proposed bike stations.
+          <br><br>
+        <span class="legend-item">
+          <span class="legend-circle darkblue"></span> Current active stations
+        </span>
+        <br>
+        <span class="legend-item">
+          <span class="legend-circle green"></span> Proposed stations
+        </span></p>
       </div>
     </div>
 
@@ -248,5 +280,6 @@
   <script src="bubble.js"></script>
   <script src="electric.js"></script>
   <script src="newstationmap.js"></script>
+
 </body>
 </html>
